@@ -10,6 +10,21 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
  */
+
+
+@import "materialize/components/color";
+// @import "materialize/components/variables";
+$primary-color: color("deep-purple", "darken-1");
+$primary-color-light: color("deep-purple", "lighten-5");
+$primary-color-dark: color("deep-purple", "darken-4");
+// $secondary-color: color("deep-purple", "accent-3");
+$secondary-color: color("amber", "accent-2");
+// $footer-bg-color: $primary-color-light;
+// $link-color: color("indigo", "accent-4");
+$button-color-raised: rgba(0, 0, 0, 0.87);//$primary-color-light;
+@import "materialize";
+@import url(https://fonts.googleapis.com/css?family=Antic+Slab);
+@import "global";
+@import "static_pages";

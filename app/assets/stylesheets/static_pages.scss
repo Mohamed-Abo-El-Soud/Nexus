@@ -1,3 +1,64 @@
 // Place all the styles related to the StaticPages controller here.
-// They will automatically be included in application.css.
+// They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.base {
+  background-color: $primary-color !important;
+}
+.bright {
+  background-color: $primary-color-light !important;
+}
+.dark {
+  background-color: $primary-color-dark !important;
+}
+.accent {
+  background-color: $secondary-color !important;
+}
+.text-primary {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+.text-secondary {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+.text-primary-light {
+  color: rgba(255, 255, 255, 1) !important;
+}
+.text-secondary-light {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+.text-accent {
+  color: $secondary-color !important;
+}
+.link {
+  color: $link-color !important;
+}
+footer.page-footer {
+  margin-top: 0px;
+  // h1,h2,h3,h4,h5,h6{
+  //   color: $primary-color;
+  // }
+  // color: $primary-color-dark;
+  // a {
+  //   color: $secondary-color;
+  // }
+}
+
+header,main {
+  // background-color: $primary-color;
+  // color: $primary-color-light;
+}
+
+nav {
+  // color: $secondary-color;
+}
