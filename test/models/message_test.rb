@@ -6,7 +6,7 @@ class MessageTest < ActiveSupport::TestCase
     @first = messages(:steve_mail)
     @second = messages(:max_mail)
     @steve = accounts(:steve)
-    @max = accounts(:max)
+    @mad = accounts(:mad)
   end
   
   test "content length validity" do
@@ -41,8 +41,8 @@ class MessageTest < ActiveSupport::TestCase
   
   test "getting accounts" do
     assert_equal @first.sender,@steve
-    assert_equal @second.sender,@max
-    assert_equal @first.reciever,@max
+    assert_equal @second.sender,@mad
+    assert_equal @first.reciever,@mad
     assert_equal @second.reciever,@steve
   end
 end

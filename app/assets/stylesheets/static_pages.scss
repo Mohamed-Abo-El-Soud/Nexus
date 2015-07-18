@@ -3,62 +3,117 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+
+/* ************* formatting for messages ************* */
+.messages {
+  @media only screen and (max-width: 603px) {
+    .container {
+      width: 100%;
+    }
+  }
+  .collection {
+    margin: 0px;
+    border: 0px;
+    overflow: visible;
+    .secondary-content {
+      top: 16px;
+      right: 16px;
+    }
+    .collection-item.avatar {
+      border-bottom: 1px solid #e0e0e0;
+      .title {
+        color: rgba(0, 0, 0, 0.87);
+      }
+    }
+  }
 }
 
-main {
-  flex: 1 0 auto;
+/* ************* end formatting for messages ************* */
+/* ************* formatting for sidenav ************* */
+.side-nav#mobile-demo {
+  .card-image {
+    max-height: 250px;
+  }
+  /* styling for the card title */
+  .card-title {
+    top: -10px;
+  }
+  .section {
+    padding: 0 15px;
+  }
 }
 
-.base {
-  background-color: $primary-color !important;
-}
-.bright {
-  background-color: $primary-color-light !important;
-}
-.dark {
-  background-color: $primary-color-dark !important;
-}
-.accent {
-  background-color: $secondary-color !important;
-}
-.text-primary {
-  color: rgba(0, 0, 0, 0.87) !important;
-}
-.text-secondary {
-  color: rgba(0, 0, 0, 0.54) !important;
-}
-.text-primary-light {
-  color: rgba(255, 255, 255, 1) !important;
-}
-.text-secondary-light {
-  color: rgba(255, 255, 255, 0.7) !important;
-}
-.text-accent {
-  color: $secondary-color !important;
-}
-.link {
-  color: $link-color !important;
-}
-footer.page-footer {
-  margin-top: 0px;
-  // h1,h2,h3,h4,h5,h6{
-  //   color: $primary-color;
-  // }
-  // color: $primary-color-dark;
-  // a {
-  //   color: $secondary-color;
-  // }
+/* ************* end formatting for sidenav ************* */
+/* ************* formatting for navbar ************* */
+.navbar-fixed {
+  nav {
+    ul li a {
+      /* pack tablet menu icons closer together */
+      padding: 0px 8px;
+    }
+    a label {
+      /* search icon resizing */
+      font-size: 1rem;
+      /* search icon coloring */
+      color: $primary-text-color-light;
+    }
+  }
 }
 
-header,main {
-  // background-color: $primary-color;
-  // color: $primary-color-light;
+/* ************* end formatting for navbar ************* */
+/* ************* formatting for options ************* */
+#options {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  $optionsWidth: 320px;
+  $cardImgHeight: 150px;
+  @include visibility(0);
+  &.active {
+    /* make window visible */
+    @include visibility(1);
+  }
+  img {
+    max-height: $cardImgHeight;
+    max-width: $optionsWidth;
+  }
+  .overlay {
+    max-height: $cardImgHeight;
+  }
+  .card-content {
+    max-width: $optionsWidth;
+  }
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 }
 
-nav {
-  // color: $secondary-color;
+/* ************* end formatting for options ************* */
+/* ************* formatting for search bar ************* */
+form#search-form {
+  /* visibility hides the bar */
+  @include visibility(0);
+  transition: all 0.2s;
+  /* absolute positioning and padding to occupy minimal space */
+  position: absolute;
+  padding: 0px;
+  /* to cover the collapse button */
+  z-index: 1;
+  color: #444;
+  &.active {
+    /* transition of search bar to visible */
+    @include visibility(1);
+  }
+  input[type="search"] {
+    /* general appearance settings */
+    ~ button[type="reset"] {
+      position: absolute;
+      top: 0;
+      right: 1rem;
+      background: none;
+      border: none;
+    }
+  }
 }
+
+/* ************* end formatting for search bar ************* */

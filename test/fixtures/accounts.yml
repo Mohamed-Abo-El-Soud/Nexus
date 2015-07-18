@@ -11,10 +11,12 @@
 #  column: value
 
 steve:
-  name: Steve
+  first_name: Steve
+  last_name: Marcus
   email: SMarcus@mail.com
   
-max:
-  name: Max
+mad:
+  first_name: Mad
+  last_name: Max
   email: MadMax@mail.com
 

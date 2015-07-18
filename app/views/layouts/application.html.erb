@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Nexus</title>
+  <!-- load icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -9,11 +11,14 @@
 </head>
 <body class="dark">
 
-<header>
+
+<%= render "layouts/modals" %>
+
+<!--<header>-->
   <%= render "layouts/header" %>
-</header>
+<!--</header>-->
   
-<main class=" text-secondary-light">
+<main class="container text-secondary-light">
   <%= yield %>
 </main>
   

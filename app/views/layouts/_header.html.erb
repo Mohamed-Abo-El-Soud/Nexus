@@ -1,52 +1,139 @@
-<nav class="hide transparent grey-text text-lighten-2">
-  <div class="nav-wrapper">
-    <!--
-      <a href="#home" id="logo" class="hide-on-med-and-up brand-logo slab-font">Nexus</a>
-    -->
-    
-      <a href="" id="logo" class="hide-on-med-and-up brand-logo slab-font">Nexus</a>
-    
-    <div class="row">
-      <h4 class="col l6 m4 hide-on-small-only">
-      <!--
-        <a href="#home" id="logo" class="slab-font">Nexus</a>
-        -->
-        <a href="/" id="logo" class="slab-font">Nexus</a>
-      </h4>
+<nav class="hide transparent z-depth-0">
+  <div class="container nav-wrapper">
+    <a href="/" id="logo" class="brand-logo text- slab-font">Nexus</a>
       <ul id="nav-mobile" class="right hide-on-small-only">
         <li>
-          <button data-target="log-in" 
-                  class="btn modal-trigger
-                         grey lighten-4 deep-purple-text
-                         text-darken-4 waves-effect
-                         waves-dark btn modal-trigger">
+          <button data-target="log-in" class="btn modal-trigger waves-effect waves-dark ">
             Log In</button>
         </li>
       </ul>
-    </div>
   </div>
 </nav>
-  
-  
-  
-<nav class="transparent text-primary-light">
-  <div class="nav-wrapper">
-    
-      <a href="" id="logo" class="hide-on-med-and-up brand-logo slab-font">Nexus</a>
-    
-    <div class="row">
-      <h4 class="col l6 m4 hide-on-small-only">
-        <a href="/" id="logo" class="slab-font">Nexus</a>
-      </h4>
-      <ul id="nav-mobile" class="right hide-on-small-only">
-        <li>
-          <button data-target="log-in" 
-                  class="btn modal-trigger waves-effect
-                         waves-dark btn modal-trigger">
-            Log In</button>
+ 
+<!--navbar-->
+<div class="hide0 navbar-fixed">
+  <nav class="dark">
+    <div class="row nav-wrapper">
+      <!--collapse-->
+      <a href="#" data-activates="mobile-demo" class="col s1 button-collapse hide-on-med-and-up">
+        <i class="material-icons">menu</i></a>
+      <!--end collapse-->
+      <!-- right nav desktop -->
+      <ul id="nav-desktop" class="right hide-on-small-only">
+        <li><a data-activates="search" href="#" class="button-search">
+          <label for="search">
+            <i class="material-icons left">search</i>
+            <span class="hide-on-med-and-down" >Search</span>
+          </label>
+          </a>
+        </li>
+        <li><a href="#">
+            <i class="material-icons left">send</i>
+            <span class="hide-on-med-and-down" >Sent</span>
+            </a>
+        </li>
+        <li><a href="#">
+            <i class="material-icons left">report_problem</i>
+            <span class="hide-on-med-and-down" >Junk</span>
+            </a>
+        </li>
+        <li><a href="#">
+            <i class="material-icons left">delete</i>
+            <span class="hide-on-med-and-down" >Trash</span>
+            </a>
+        </li>
+        <li><a data-activates="options" href="#" class="button-options">
+            <i class="material-icons left">more_horiz</i>
+            <span class="hide-on-med-and-down" >Options</span>
+            </a>
         </li>
       </ul>
+      <!-- end right nav desktop -->
+      <!--logo-->
+      <a href="/" class="hide-on-med-and-up slab-font brand-logo">Sent</a>
+      <h4 class="hide-on-small-only col s4"><a href="/" class="slab-font">Sent</a></h4>
+      <!--end logo-->
+      <!--options window-->
+      <div id="options" class="card hoverable">
+        <div class="card-image">
+          <img id="cow" src="https://s-media-cache-ak0.pinimg.com/originals/99/a2/65/99a265b17595caaaa2c382e168a5e32b.jpg">
+           <!-- the overlay adds a tint to the photo -->
+            <div class="overlay"></div>
+          <span class="card-title white-text">
+            <h5 class="white-text fw300">Mohamed</h5>
+          </span>
+        </div>
+        <div class="card-content">
+          <b>Mohamed Abo El Soud</b>
+          <p>mohamed.aaes@gmail.com</p>
+        </div>
+        <div class="card-action white-text">
+          <!-- the href attribute matches the button with the model -->
+          <a class="waves-effect waves-dark red btn-flat button-settings white-text"  
+             href="#settings">settings</a>
+          <a  class="waves-effect waves-dark red btn-flat white-text" href='#'>signout</a>
+        </div>
+      </div>
+      <!--end options window-->
+      <!--side nav-->
+      <ul class="side-nav" id="mobile-demo">
+        <div class="card">
+          <div class="card-image">
+            <img class="" src="https://s-media-cache-ak0.pinimg.com/originals/99/a2/65/99a265b17595caaaa2c382e168a5e32b.jpg">
+           <!-- the overlay adds a tint to the photo -->
+            <div class="overlay"></div>
+            <span class="card-title">
+              <h5 class="white-text fw300">Mohamed A.</h5>
+            </span>
+          </div>
+          <div class="card-content hide">
+            <!-- blank for now... -->
+          </div>
+          <div class="card-action hide">
+            <a href="#">This is a link</a>
+            <a href='#'>This is a link</a>
+          </div>
+        </div>
+        <li><a href="sass.html">
+          <i class="mdi-content-mail right"></i>Inbox</a>
+        </li>
+        <li><a href="components.html">
+          <i class="mdi-content-send right"></i>Sent</a>
+        </li>
+        <li><a href="javascript.html">
+          <i class="mdi-action-report-problem right"></i>Junk</a>
+        </li>
+        <li><a href="mobile.html">
+          <i class="mdi-action-delete right"></i>Trash</a>
+        </li>
+        <div class="divider"></div>
+        <div class="section grey-text text-darken-2">
+          <h5 class="fw300">Account</h5>
+        </div>
+        <!-- the href attribute matches the button with the model -->
+        <li><a href="#settings" class="button-settings">
+          <i class="mdi-action-settings right"></i>Settings</a>
+        </li>
+        <li>
+          <a href='#'>Signout</a>
+        </li>
+      </ul>
+      <!--side nav end-->
+      <!--search-->
+      <form id="search-form" class="col s12">
+        <div class="input-field">
+          <input id="search" type="search" class="white">
+          <button type="reset">
+            <i class="mdi-navigation-close"></i></button>
+        </div>
+      </form>
+      <!--search end-->
+      <!--search icon-->
+      <a href="#" data-activates="search" class="col right button-search hide-on-med-and-up">
+        <label for="search">
+          <i class="mdi-action-search"></i></label></a>
+      <!--search icon end-->
     </div>
-  </div>
-</nav>
-  
+  </nav>
+</div>
+<!--end navbar-->

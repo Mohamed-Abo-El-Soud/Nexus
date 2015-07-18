@@ -23,34 +23,13 @@ img {
     font-size: 80px;
 }
 /* nav fixes for materialize */
-nav {
-  &.transparent {
-    box-shadow: 0 0 0 0;
-  }
-  .nav-wrapper {
-    padding: 0 30px;
-  }
-  .brand-logo {
-    color: inherit;
-  }
-  a {
-    color: inherit;
-  }
-  h4 {
-    margin: 0;
-    line-height: inherit;
-  }
-  ul a {
-    color: inherit;
-  }
-}
 label {
   /* overrides the default font color of labels to white */
-  font-size: 1rem;
+  // font-size: 1rem;
   /* overrides the default font size of labels of 0.8em in materialize.css */
-  color: white;
+  // color: white;
   /* makes the search the cursor a pointer when it hovers over search icon */
-  cursor: pointer;
+  // cursor: pointer;
 }
 .slab-font {
     font-family: "Antic Slab", serif;
@@ -62,4 +41,46 @@ label {
     visibility: hidden;
     }
   opacity: $bool;
+}
+
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.base {
+  background-color: $primary-color !important;
+}
+.bright {
+  background-color: $primary-color-light !important;
+}
+.dark {
+  background-color: $primary-color-dark !important;
+}
+.accent {
+  background-color: $secondary-color !important;
+}
+.text-primary {
+  color: $primary-text-color !important;
+}
+.text-secondary {
+  color: $secondary-text-color !important;
+}
+.text-primary-light {
+  color: $primary-text-color-light !important;
+}
+.text-secondary-light {
+  color: $secondary-text-color-light !important;
+}
+.text-accent {
+  color: $secondary-color !important;
+}
+.link {
+  color: $link-color !important;
 }

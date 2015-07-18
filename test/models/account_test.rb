@@ -5,15 +5,15 @@ class AccountTest < ActiveSupport::TestCase
   #   assert true
   # end
   def setup
-    @user = Account.new(name:"Michael", email:"MJackson@mail.com")
+    @user = Account.new(first_name:"Michael", last_name:"Jackson", email:"MJackson@mail.com")
     @steve = accounts(:steve)
-    @max = accounts(:max)
+    @mad = accounts(:mad)
   end
   
   test "check if user is valid" do
     assert @user.valid?
     assert @steve.valid?
-    assert @max.valid?
+    assert @mad.valid?
   end
   
   test "should be valid" do
@@ -21,7 +21,7 @@ class AccountTest < ActiveSupport::TestCase
   end
 
   test "name should be present" do
-    @user.name = "     "
+    @user.first_name = "     "
     assert_not @user.valid?
   end
 
@@ -31,7 +31,7 @@ class AccountTest < ActiveSupport::TestCase
   end
 
   test "name should not be too long" do
-    @user.name = "a" * 51
+    @user.first_name = "a" * 51
     assert_not @user.valid?
   end
 

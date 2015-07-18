@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'accounts/search'
+
+  get 'accounts/inbox'
+
+  get 'accounts/sent'
+
+  get 'accounts/spam'
+
+  get 'accounts/trash'
+
   get '/about' => 'static_pages#about'
 
   get '/contact' => 'static_pages#contact'
@@ -7,6 +17,8 @@ Rails.application.routes.draw do
   get '/help' => 'static_pages#help'
 
   root "static_pages#home"
+  
+  resources :accounts
   
   # this is a test to make sure forked it right
   
