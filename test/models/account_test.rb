@@ -1,19 +1,12 @@
 require 'test_helper'
 
 class AccountTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  
   def setup
-    @user = Account.new(first_name:"Michael", last_name:"Jackson", email:"MJackson@mail.com")
+    @user = Account.new(first_name: "Michael", last_name: "Jackson", email: "MJackson@mail.com",
+                        password: "foobar", password_confirmation: "foobar")
     @steve = accounts(:steve)
     @mad = accounts(:mad)
-  end
-  
-  test "check if user is valid" do
-    assert @user.valid?
-    assert @steve.valid?
-    assert @mad.valid?
   end
   
   test "should be valid" do
@@ -40,6 +33,13 @@ class AccountTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "email addresses should be unique" do
+    duplicate_user = @user.dup
+    duplicate_user.email = @user.email.upcase
+    @user.save
+    assert_not duplicate_user.valid?
+  end
+
   test "email validation should accept valid addresses" do
     valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
                          first.last@foo.jp alice+bob@baz.cn]
@@ -47,6 +47,16 @@ class AccountTest < ActiveSupport::TestCase
       @user.email = valid_address
       assert @user.valid?, "#{valid_address.inspect} should be valid"
     end
+  end
+  
+  test "password should be present (nonblank)" do
+    @user.password = @user.password_confirmation = " " * 6
+    assert_not @user.valid?
+  end
+
+  test "password should have a minimum length" do
+    @user.password = @user.password_confirmation = "a" * 5
+    assert_not @user.valid?
   end
   
 end

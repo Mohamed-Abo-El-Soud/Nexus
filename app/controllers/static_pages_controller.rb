@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  before_action :new_user
+  # before_action :new_user
   
   def home
   end
@@ -13,10 +13,10 @@ class StaticPagesController < ApplicationController
   def help
   end
   
-  private
+  # private
   
-  def new_user
-    @account = Account.new
-  end
+  # def new_user
+  #   @account = Account.new
+  # end
   
 end

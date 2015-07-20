@@ -6,11 +6,18 @@ class MailAssociationTest < ActiveSupport::TestCase
   # end
   def setup
     @user = Account.new(name:"Michael", email:"MJackson@mail.com")
-    @steve = accounts(:first)
-    @max = accounts(:second)
+    @steve = accounts(:steve)
+    @mad = accounts(:mad)
   end
   
-  test "" do
-    en
+  # test "" do
+  #   en
+  
+  test "check if user is valid" do
+    assert @user.valid?
+    assert_equal @steve.first_name, "Steve"
+    assert @steve.valid?
+    assert @mad.valid?
+  end
   
 end

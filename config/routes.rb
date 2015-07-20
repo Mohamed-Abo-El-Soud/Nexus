@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
 
-  get 'accounts/search'
+  get 'accounts/new'
 
-  get 'accounts/inbox'
+  # get 'accounts/search'
 
-  get 'accounts/sent'
+  # get 'accounts/inbox'
 
-  get 'accounts/spam'
+  # get 'accounts/sent'
 
-  get 'accounts/trash'
+  # get 'accounts/spam'
+
+  # get 'accounts/trash'
 
   get '/about' => 'static_pages#about'
 
