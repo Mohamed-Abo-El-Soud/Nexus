@@ -13,11 +13,11 @@ class MailAssociationTest < ActiveSupport::TestCase
   # test "" do
   #   en
   
-  test "check if user is valid" do
-    assert @user.valid?
-    assert_equal @steve.first_name, "Steve"
-    assert @steve.valid?
-    assert @mad.valid?
-  end
+  # test "check if user is valid" do
+  #   assert @user.valid?
+  #   assert_equal @steve.first_name, "Steve"
+  #   assert @steve.valid?
+  #   assert @mad.valid?
+  # end
   
 end

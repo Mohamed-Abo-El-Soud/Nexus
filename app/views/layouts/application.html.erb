@@ -14,11 +14,17 @@
 
 <%= render "layouts/modals" %>
 
-<!--<header>-->
-  <%= render "layouts/header" %>
-<!--</header>-->
+
+<%= render "layouts/header" %>
+
   
 <main class="container text-secondary-light">
+
+  <% flash.each do |message_type, message| %>
+    <!-- script below assumes such a function exists -->
+    <script>deployToast('<%= message_type %>','<%= message %>');</script>
+  <% end %>
+  
   <%= yield %>
 </main>
   

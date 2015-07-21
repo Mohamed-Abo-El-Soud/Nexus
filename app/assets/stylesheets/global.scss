@@ -1,3 +1,35 @@
+.base {
+  background-color: $primary-color !important;
+}
+.bright {
+  background-color: $primary-color-light !important;
+}
+.dark {
+  background-color: $primary-color-dark !important;
+}
+.accent {
+  background-color: $secondary-color !important;
+}
+.text-primary {
+  color: $primary-text-color !important;
+}
+.text-secondary {
+  color: $secondary-text-color !important;
+}
+.text-primary-light {
+  color: $primary-text-color-light !important;
+}
+.text-secondary-light {
+  color: $secondary-text-color-light !important;
+}
+.text-accent {
+  color: $secondary-color !important;
+}
+.link {
+  color: $link-color !important;
+}
+
+
 // styling for the debug box
 
 @mixin box_sizing {
@@ -81,33 +113,6 @@ main {
   flex: 1 0 auto;
 }
 
-.base {
-  background-color: $primary-color !important;
-}
-.bright {
-  background-color: $primary-color-light !important;
-}
-.dark {
-  background-color: $primary-color-dark !important;
-}
-.accent {
-  background-color: $secondary-color !important;
-}
-.text-primary {
-  color: $primary-text-color !important;
-}
-.text-secondary {
-  color: $secondary-text-color !important;
-}
-.text-primary-light {
-  color: $primary-text-color-light !important;
-}
-.text-secondary-light {
-  color: $secondary-text-color-light !important;
-}
-.text-accent {
-  color: $secondary-color !important;
-}
-.link {
-  color: $link-color !important;
+.toast {
+  // @extend .dark, .text-primary
 }

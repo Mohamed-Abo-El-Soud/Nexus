@@ -5,15 +5,15 @@ class AccountsController < ApplicationController
   
   def show
     @account = Account.find(params[:id])
-    # debugger
   end
   
   def create
-    # debugger
     @account = Account.new(account_params)
     if @account.save
-      # Handle a successful save.
+      flash[:success] = "Welcome to the Nexus!"
+      redirect_to @account
     else
+      # save not successful, show errors
       render '/static_pages/home'
     end
   end
