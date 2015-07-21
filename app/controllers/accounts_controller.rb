@@ -10,11 +10,11 @@ class AccountsController < ApplicationController
   
   def create
     # debugger
-    @account = Account.new(account_params)    # Not the final implementation!
+    @account = Account.new(account_params)
     if @account.save
       # Handle a successful save.
     else
-      render 'new'
+      render '/static_pages/home'
     end
   end
   

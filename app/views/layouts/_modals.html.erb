@@ -1,6 +1,6 @@
 <!-- log-in -->
 <div id="log-in" class="modal front">
-  <%= form_for(@account, html: {class: "col s12", id: "settings-form"}) do |f| %>
+  <%= form_for(@account, html: {class: "col s12", id: "log-in-form"}) do |f| %>
     <div class="modal-content">
       <h4>Log In</h4>
       <div class="row">
@@ -18,7 +18,7 @@
     </div>
     <div class="modal-footer">
       <%= link_to "Log in", "#",
-        {onClick: "$(this).closest('form#settings-form.col.s12').submit()", id: "save-button",
+        {onClick: "$(this).closest('form#log-in-form.col.s12').submit()", id: "save-button",
           class: "modal-action modal-close waves-effect waves-green btn-flat"} %>
       <a href="#!" id="cancel-button" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
     </div>
@@ -28,7 +28,8 @@
 
 <!-- sign-up -->
 <div id="sign-up" class="modal front">
-  <%= form_for(@account, html: {class: "col s12", id: "settings-form"}) do |f| %>
+                   <!-- the "sign-up-form" id is used in the JQuery function in static_pages.coffee -->
+  <%= form_for(@account, html: {class: "col s12", id: "sign-up-form"}) do |f| %>
     <div class="modal-content">
       <h4>Sign up</h4>
       <%= render 'shared/error_messages' %>
@@ -70,7 +71,7 @@
     </div>
     <div class="modal-footer">
       <%= link_to "Sign up", "#",
-        {onClick: "$(this).closest('form#settings-form.col.s12').submit()", id: "save-button",
+        {onClick: "$(this).closest('form#sign-up-form.col.s12').submit()", id: "save-button",
           class: "modal-action modal-close waves-effect waves-green btn-flat"} %>
       <a href="#!" id="cancel-button" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
     </div>

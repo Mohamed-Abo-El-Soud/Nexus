@@ -12,17 +12,11 @@ module Nexus
     # set response upon errors
     config.action_view.field_error_proc = Proc.new do |html_tag, instance| 
       n_node = Nokogiri::HTML html_tag
-      if n_nade.css('input').any?
-        n_nade.css('input').tap{ |ns| ns.add_class('error-field') }
+      if n_node.css('input').any?
+        n_node.css('input').add_class('invalid').to_s.html_safe
+      else
+        "#{html_tag}".html_safe
       end
-      puts html_tag#.class.name
-      # puts html_tag#.methods
-      #instance#"#{html_tag}"
-      # page = Nokogiri::HTML
-      # script = "<script id='error-loading-jquery-script'>
-        # console.log($('#error-loading-jquery-script').parent().children('input'));</script>"
-      # "<div class=\"field_with_moo\">#{script}#{html_tag}</div>".html_safe
-      "#{html_tag}".html_safe
     end
     
     # Settings in config/environments/* take precedence over those specified here.
