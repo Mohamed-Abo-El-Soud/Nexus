@@ -1,2 +1,9 @@
+<% if @account.errors.any? %>
+  <script>
+    $('#sign-up').openModal();
+  </script>
+<% end %>
+
+
 <h1>Accounts#new</h1>
 <p>Find me in app/views/accounts/new.html.erb</p>

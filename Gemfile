@@ -3,6 +3,10 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.2'
+# console formatting
+gem 'hirb'
+# html parsing for input field errors (when user puts invalid info so sign up)
+gem 'nokogiri'
 # password encryption
 gem 'bcrypt', '3.1.7'
 # Use sqlite3 as the database for Active Record

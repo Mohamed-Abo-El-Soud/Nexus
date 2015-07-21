@@ -1,0 +1,9 @@
+<% provide(:title, @account.first_name) %>
+<h1>
+  <%= gravatar_for @account %>
+  <%= @account.first_name %>
+</h1>
+<ul>
+  <li><%= @account.first_name %> <%= @account.last_name %></li>
+  <li><%= @account.email %></li>
+</ul>

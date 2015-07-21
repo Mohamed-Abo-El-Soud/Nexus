@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'accounts/new'
+  # get 'accounts/new'
 
   # get 'accounts/search'
 

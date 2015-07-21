@@ -31,6 +31,7 @@
   <%= form_for(@account, html: {class: "col s12", id: "settings-form"}) do |f| %>
     <div class="modal-content">
       <h4>Sign up</h4>
+      <%= render 'shared/error_messages' %>
       <div class="row">
         <div class="input-field col s12 m6">
           <%= f.label :first_name, class: "active" %>
