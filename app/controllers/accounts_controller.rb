@@ -11,6 +11,7 @@ class AccountsController < ApplicationController
     @sign_up_attempt = false
     @account = Account.new(account_params)
     if @account.save
+      log_in @account
       @sign_up_attempt = true
       flash[:success] = "Welcome to the Nexus!"
       redirect_to @account

@@ -19,3 +19,9 @@ mad:
   first_name: "Mad"
   last_name: "Max"
   email: "MadMax@mail.com"
+
+michael:
+  first_name: Michael
+  last_name: Example
+  email: michael@example.com
+  password_digest: <%= Account.digest('password') %>

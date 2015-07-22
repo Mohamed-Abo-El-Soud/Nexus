@@ -5,8 +5,8 @@ class SessionsController < ApplicationController
     account = Account.find_by(email: params[:session][:email].downcase)
     if account && account.authenticate(params[:session][:password])
       @log_in_attempt = true
-      # Log the account in and redirect to the account's show page.
       log_in account
+      params[:session][:remember_me] == '1' ? remember(account) : forget(account)
       redirect_to account
     else
       flash[:danger] = 'Invalid email/password combination' # Not quite right!
@@ -14,4 +14,10 @@ class SessionsController < ApplicationController
       render '/static_pages/home'
     end
   end
+  
+  def destroy
+    log_out if logged_in?
+    redirect_to root_url
+  end
+  
 end

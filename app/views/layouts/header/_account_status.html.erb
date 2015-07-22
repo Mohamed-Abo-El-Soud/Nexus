@@ -1,9 +1,6 @@
 <ul id='options' class='dropdown-content window'>
   <div class="card hoverable">
     <div class="card-image">
-      <!--
-      <img id="cow" src="https://s-media-cache-ak0.pinimg.com/originals/99/a2/65/99a265b17595caaaa2c382e168a5e32b.jpg">
-      -->
       <%= gravatar_for current_account %>
        <!-- the overlay adds a tint to the photo -->
         <!-- <div class="overlay"></div> -->
@@ -12,6 +9,7 @@
       </span>
     </div>
     <div class="card-content">
+      <%= link_to "Profile", current_account, class: "btn-flat accent col s12 center-align row" %>
       <b><%= current_account.first_name %> <%= current_account.last_name %></b>
       <p><%= current_account.email %></p>
     </div>
@@ -19,7 +17,7 @@
       <!-- the href attribute matches the button with the model -->
       <a class="waves-effect waves-dark red btn-flat button-settings white-text"  
          href="#settings">settings</a>
-      <a  class="waves-effect waves-dark red btn-flat white-text" href='#'>signout</a>
+      <%= link_to "Log out", logout_path, method: "delete", class: "waves-effect waves-dark red btn-flat white-text" %>
     </div>
   </div>
 </ul>
