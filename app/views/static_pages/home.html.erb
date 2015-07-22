@@ -1,5 +1,5 @@
-<% unless @account.nil? %>
-  <% if @account.errors.any? %>
+<% unless @sign_up_attempt.nil? %>
+  <% unless @sign_up_attempt %>
     <script>
       $('#sign-up').openModal();
     </script>
@@ -13,6 +13,7 @@
   <% end %>
 <% end %>
 
+<% provide(:title, "Home") %>
 <div id="home" class="row valign-wrapper">
 
   <div class="col s12 l12 center-align valign">

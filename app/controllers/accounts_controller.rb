@@ -8,8 +8,10 @@ class AccountsController < ApplicationController
   end
   
   def create
+    @sign_up_attempt = false
     @account = Account.new(account_params)
     if @account.save
+      @sign_up_attempt = true
       flash[:success] = "Welcome to the Nexus!"
       redirect_to @account
     else

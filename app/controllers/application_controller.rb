@@ -7,13 +7,15 @@ class ApplicationController < ActionController::Base
   
   # modal seems to be present at every page
   # TODO: the modals don't need to be rendered if the user is logged in
-  before_action :new_user
+  before_action :check_if_account_present
   
   
   private
   
-  def new_user
-    @account = Account.new
+  def check_if_account_present
+    unless logged_in?
+      @account = Account.new
+    end
   end
   
 end
