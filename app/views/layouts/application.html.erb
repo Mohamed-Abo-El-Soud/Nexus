@@ -11,8 +11,9 @@
 </head>
 <body class="dark">
 
-
-<%= render "layouts/modals" %>
+<% unless logged_in? %>
+  <%= render "layouts/modals" %>
+<% end %>
 
 
 <%= render "layouts/header" %>

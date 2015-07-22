@@ -1,7 +1,16 @@
-<% if @account.errors.any? %>
-  <script>
-    $('#sign-up').openModal();
-  </script>
+<% unless @account.nil? %>
+  <% if @account.errors.any? %>
+    <script>
+      $('#sign-up').openModal();
+    </script>
+  <% end %>
+<% end %>
+<% unless @log_in_attempt.nil? %>
+  <% unless @log_in_attempt %>
+    <script>
+      $('#log-in').openModal();
+    </script>
+  <% end %>
 <% end %>
 
 <div id="home" class="row valign-wrapper">

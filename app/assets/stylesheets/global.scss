@@ -90,6 +90,12 @@ label {
   /* makes the search the cursor a pointer when it hovers over search icon */
   // cursor: pointer;
 }
+// fixes for the dropdown window
+.dropdown-content.window{
+  // width: $options-window-width !important;
+  min-width: $options-window-width;
+  
+}
 .slab-font {
     font-family: "Antic Slab", serif;
 }

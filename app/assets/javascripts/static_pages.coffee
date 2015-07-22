@@ -9,7 +9,7 @@ window.deployToast = (type, message)->
   typeClass = switch type
     when "success"
     then "green"
-    when "failure"
+    when "danger"
     then "red"
     when "warning"
     then "yellow"

@@ -63,19 +63,20 @@
 /* ************* end formatting for navbar ************* */
 /* ************* formatting for options ************* */
 #options {
-  position: absolute;
-  top: 7px;
-  right: 10px;
+  // position: absolute;
+  position: relative;
+  // top: 7px;
+  // right: 10px;
   $optionsWidth: 320px;
   $cardImgHeight: 150px;
-  @include visibility(0);
+  // @include visibility(0);
   &.active {
     /* make window visible */
-    @include visibility(1);
+    // @include visibility(1);
   }
   img {
     max-height: $cardImgHeight;
-    max-width: $optionsWidth;
+    // max-width: $optionsWidth;
   }
   .overlay {
     max-height: $cardImgHeight;
