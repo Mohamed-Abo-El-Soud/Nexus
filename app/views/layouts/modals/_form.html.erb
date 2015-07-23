@@ -1,0 +1,67 @@
+<!-- the "sign-up-form" id is used in the JQuery function in static_pages.coffee -->
+<%= form_for(subject, html: {class: "col s12", id: id}) do |f| %>
+    <div class="modal-content">
+      <h4><%= title %></h4>
+      <%= render 'shared/error_messages', subject: subject %>
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <%= f.label :first_name, class: "active" %>
+          <%= f.text_field :first_name, class: "validate" %>
+        </div>
+        <div class="input-field col s12 m6">
+          <%= f.label :last_name, class: "active" %>
+          <%= f.text_field :last_name, class: "validate" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+          <%= f.label :email, class: "active" %>
+          <%= f.email_field :email, class: "validate" %>
+        </div>
+      </div>
+      <div class="row" id="password-input">
+        <div id="shown" class="input-field col s12">
+          <i class="material-icons prefix">vpn_key</i>
+          <%= f.label :password, class: "active" %>
+          <%= f.password_field :password, class: "validate", placeholder: is_unchanged(unchanged) %>
+        </div>
+        <div id="hidden" class="input-field col s12 hide">
+          <%= f.label "Enter the password again", class: "active" %>
+          <%= f.password_field :password_confirmation, class: "validate" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">phone</i>
+          <%= f.label :telephone, class: "active" %>
+          <%= f.telephone_field :telephone, class: "validate" %>
+        </div>
+      </div>
+      <% if !subject.email.blank? %>
+        <div class="row">
+          <div class="input-field col s12 m6 card hoverable">
+            <div class="card-image">
+              <%= gravatar_for subject %>
+            </div>
+            <div class="card-content">
+              <a class="btn-flat accent col s12 center-align row" href="http://gravatar.com/emails" target="_blank">change</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="modal-footer">
+      <%= link_to link, "#",
+        {onClick: "$(this).closest('form.col.s12').submit()", id: "save-button",
+          class: "modal-action modal-close waves-effect waves-green btn-flat"} %>
+      <a href="#!" id="cancel-button" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+<% end %>
+
+
+
+
+
+
+

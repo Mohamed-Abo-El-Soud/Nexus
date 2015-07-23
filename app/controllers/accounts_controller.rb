@@ -17,7 +17,22 @@ class AccountsController < ApplicationController
       redirect_to @account
     else
       # save not successful, show errors
+      flash[:open_modal] = "#sign-up"
       render '/static_pages/home'
+    end
+  end
+  
+  def update
+    @account_edit_attempt = true
+    @account = Account.find(params[:id])
+    if @account.update_attributes(account_params)
+      @account_edit_attempt = true
+      raise
+      # Handle a successful update.
+    else
+      flash[:danger] = "Account not updated!"
+      flash[:open_modal] = "#settings"
+      render 'show'
     end
   end
   

@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
     else
       flash[:danger] = 'Invalid email/password combination' # Not quite right!
       # login not successful, show errors
+      flash[:open_modal] = "#log-in"
       render '/static_pages/home'
     end
   end

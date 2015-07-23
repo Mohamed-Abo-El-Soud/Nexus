@@ -1,4 +1,15 @@
 <% provide(:title, @account.first_name) %>
+
+
+<% unless @account_edit_attempt.nil? %>
+  <% unless @account_edit_attempt %>
+    <script>
+      $('#settings').openModal();
+    </script>
+  <% end %>
+<% end %>
+
+
 <h1>
   <%= gravatar_for @account %>
   <%= @account.first_name %>

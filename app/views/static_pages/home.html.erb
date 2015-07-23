@@ -1,17 +1,4 @@
-<% unless @sign_up_attempt.nil? %>
-  <% unless @sign_up_attempt %>
-    <script>
-      $('#sign-up').openModal();
-    </script>
-  <% end %>
-<% end %>
-<% unless @log_in_attempt.nil? %>
-  <% unless @log_in_attempt %>
-    <script>
-      $('#log-in').openModal();
-    </script>
-  <% end %>
-<% end %>
+
 
 <% provide(:title, "Home") %>
 <div id="home" class="row valign-wrapper">

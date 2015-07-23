@@ -12,7 +12,11 @@
 <body class="dark">
 
 <% unless logged_in? %>
-  <%= render "layouts/modals" %>
+  <%= render "layouts/modals/sign_up" %>
+  <%= render "layouts/modals/log_in" %>
+<% end %>
+<% if logged_in? %>
+  <%= render "layouts/modals/settings" %>
 <% end %>
 
 
@@ -22,8 +26,15 @@
 <main class="container text-secondary-light">
 
   <% flash.each do |message_type, message| %>
+    <% if message_type == "open_modal" %>
+      <script>
+        $("<%= message %>").openModal();
+      </script>
+    <% else %>
     <!-- script below assumes such a function exists -->
-    <script>deployToast('<%= message_type %>','<%= message %>');</script>
+      <script>deployToast('<%= message_type %>','<%= message %>');</script>
+    
+    <% end %>
   <% end %>
   
   <%= yield %>

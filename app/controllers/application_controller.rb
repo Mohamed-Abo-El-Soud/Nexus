@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   
   def check_if_account_present
     unless logged_in?
-      @account = Account.new
+      @account ||= Account.new
     end
   end
   
