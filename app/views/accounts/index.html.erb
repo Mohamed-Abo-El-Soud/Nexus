@@ -1,15 +1,21 @@
-<% provide(:title, 'All accounts') %>
+<% provide(:title, "All accounts page #{params[:page]}") %>
+
 <h1>All accounts</h1>
 
-<ul class="accounts collection">
+<div class="row">
+  <div class="col accent card valign-wrapper">
+    <%= pagination_change %>
+  </div>
+</div>
+
+<ul class="accounts collection text-primary">
   <% @accounts.each do |account| %>
-    <li class="collection-item">
-        <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <%= gravatar_for account, size: 50,  class: "circle" %>
-      <%= link_to "#{account.first_name} #{account.last_name}", account %>
-    </li>
+    <%= render account %>
   <% end %>
 </ul>
+
+<div class="row">
+  <div class="col accent card valign-wrapper">
+    <%= pagination_change %>
+  </div>
+</div>

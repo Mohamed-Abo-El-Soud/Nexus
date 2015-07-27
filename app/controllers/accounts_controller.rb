@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
-  before_action :logged_in_account, only: [:index, :edit, :update]
+  before_action :logged_in_account, only: [:index, :edit, :update, :destroy]
   before_action :correct_account,   only: [:edit, :update]
+  before_action :admin_account,     only: :destroy
   
   def show
     # debugger
@@ -8,7 +9,7 @@ class AccountsController < ApplicationController
   end
   
   def index
-    @accounts = Account.all
+    @accounts = Account.paginate(page: params[:page])
   end
   
   def edit
@@ -42,6 +43,12 @@ class AccountsController < ApplicationController
     end
   end
   
+  def destroy
+    Account.find(params[:id]).destroy
+    flash[:success] = "Account deleted"
+    redirect_to accounts_url
+  end
+  
   private
 
     def account_params
@@ -62,5 +69,10 @@ class AccountsController < ApplicationController
     def correct_account
       @account = Account.find(params[:id])
       redirect_to(root_url) unless current_account?(@account)
+    end
+    
+    # Confirms an admin account.
+    def admin_account
+      redirect_to(root_url) unless current_account.admin?
     end
 end

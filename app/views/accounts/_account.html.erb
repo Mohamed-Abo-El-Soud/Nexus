@@ -1,0 +1,13 @@
+<li class="collection-item avatar">
+      <%= gravatar_for account, size: 50,  class: "circle" %>
+        <span class="title"> <%= link_to "#{account.first_name} #{account.last_name}", account %> </span>
+      <p> &#35;&#35; Followers <br>
+         &#35;&#35; Following
+      </p>
+      
+      <% if current_account.admin? && !current_account?(account) %>
+          <%= link_to account, method: :delete, class: "secondary-content red-text", data: { confirm: "You sure?" } do %>
+            <i class="material-icons">delete</i>
+          <% end %>
+      <% end %>
+</li>

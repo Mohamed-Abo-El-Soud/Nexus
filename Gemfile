@@ -9,6 +9,11 @@ gem 'hirb'
 gem 'nokogiri'
 # password encryption
 gem 'bcrypt', '3.1.7'
+# for fake users for testing
+gem 'faker',                '1.4.2'
+# pagination
+gem 'will_paginate',           '3.0.7'
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
@@ -36,8 +41,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
