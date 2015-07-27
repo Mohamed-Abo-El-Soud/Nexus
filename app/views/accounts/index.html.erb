@@ -1,0 +1,15 @@
+<% provide(:title, 'All accounts') %>
+<h1>All accounts</h1>
+
+<ul class="accounts collection">
+  <% @accounts.each do |account| %>
+    <li class="collection-item">
+        <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <%= gravatar_for account, size: 50,  class: "circle" %>
+      <%= link_to "#{account.first_name} #{account.last_name}", account %>
+    </li>
+  <% end %>
+</ul>

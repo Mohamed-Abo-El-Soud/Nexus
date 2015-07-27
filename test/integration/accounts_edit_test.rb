@@ -7,6 +7,7 @@ class AccountsEditTest < ActionDispatch::IntegrationTest
   end
 
   test "unsuccessful edit" do
+    log_in_as(@account)
     get account_path(@account)
     assert_template 'accounts/show'
     patch account_path(@account), account: { first_name:  "",
@@ -16,9 +17,15 @@ class AccountsEditTest < ActionDispatch::IntegrationTest
     assert_template 'accounts/show'
   end
   
-  test "successful edit" do
-    get account_path(@account)
-    assert_template 'accounts/show'
+  test "successful edit with friendly forwarding" do
+    get edit_account_path(@account)
+    log_in_as(@account)
+    assert_redirected_to edit_account_path(@account)
+    
+  # test "successful edit" do
+  #   log_in_as(@account)
+  #   get account_path(@account)
+  #   assert_template 'accounts/show'
     first_name  = "Foo"
     last_name  = "Bar"
     email = "foo@bar.com"

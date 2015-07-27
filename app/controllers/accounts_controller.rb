@@ -1,11 +1,17 @@
 class AccountsController < ApplicationController
-  
-  def new
-  end
+  before_action :logged_in_account, only: [:index, :edit, :update]
+  before_action :correct_account,   only: [:edit, :update]
   
   def show
     # debugger
     @account = Account.find(params[:id])
+  end
+  
+  def index
+    @accounts = Account.all
+  end
+  
+  def edit
   end
   
   def create
@@ -27,8 +33,6 @@ class AccountsController < ApplicationController
     if @account.update_attributes(account_params)
       flash[:success] = "Profile updated"
       redirect_to @account
-      # raise
-      # Handle a successful update.
     else
       flash[:danger] = "Account not updated!"
       flash[:open_modal] = "#settings"
@@ -45,5 +49,18 @@ class AccountsController < ApplicationController
                                    :email, :telephone, :password,
                                    :password_confirmation)
     end
-  
+    
+    def logged_in_account
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        flash[:open_modal] = "#log-in"
+        redirect_to root_url
+      end
+    end
+    
+    def correct_account
+      @account = Account.find(params[:id])
+      redirect_to(root_url) unless current_account?(@account)
+    end
 end
