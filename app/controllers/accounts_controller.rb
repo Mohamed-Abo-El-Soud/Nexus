@@ -21,7 +21,6 @@ class AccountsController < ApplicationController
       @account.send_activation_email
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
-      
       # log_in @account
       # flash[:success] = "Welcome to the Nexus!"
       # redirect_to @account

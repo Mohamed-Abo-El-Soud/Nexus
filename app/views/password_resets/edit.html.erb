@@ -1,9 +1,10 @@
 <div class="row">
 <div id="" class="card col s12 m6">
-    <%= form_for(@account, url: password_reset_path(params[:id]), html: {class: "col s12", id: id}) do |f| %>
+    <% #debugger %>
+    <%= form_for(@account, url: password_reset_path(params[:id]), html: {class: "col s12", id: "password-reset-form"}) do |f| %>
         <div class="modal-content">
-          <h4><%= title %></h4>
-          <%= render 'shared/error_messages', subject: subject %>
+          <h4>Reset your password</h4>
+          <%= render 'shared/error_messages', subject: @account %>
           
           <%= hidden_field_tag :email, @account.email %>
           
@@ -11,7 +12,7 @@
             <div id="shown" class="input-field col s12">
               <i class="material-icons prefix">vpn_key</i>
               <%= f.label :password, class: "active" %>
-              <%= f.password_field :password, class: "validate", placeholder: is_unchanged(unchanged) %>
+              <%= f.password_field :password, class: "validate" %>
             </div>
             <div id="hidden" class="input-field col s12 hide">
               <%= f.label "Enter the password again", class: "active" %>
@@ -20,7 +21,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <%= link_to link, "#",
+          <%= link_to "Save", "#",
             {onClick: "$(this).closest('form.col.s12').submit()", id: "save-button",
               class: "modal-action modal-close waves-effect waves-green btn-flat"} %>
           <a href="#!" id="cancel-button" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>

@@ -1,3 +1,9 @@
+<% #unchanged: (boolean) show an "unchanged" placeholder over the password input field %>
+<% #id: (string) id field for styling and javascript %>
+<% #subject: (object) the object that the form submits info to %>
+<% #title: (string) title of the form %>
+<% #link: (string/html) the content of the save button (inside the "a" tag) %>
+
 <!-- the "sign-up-form" id is used in the JQuery function in static_pages.coffee -->
 <%= form_for(subject, html: {class: "col s12", id: id}) do |f| %>
     <div class="modal-content">
