@@ -1,0 +1,28 @@
+<!-- log-in -->
+<div class="row">
+<div id="log-in" class="card col s12 m6">
+  <%= form_for(:password_reset, url: password_resets_path, html: {class: "col s12", id: "forgot-password-form"}) do |f| %>
+    <div class="card-content">
+      <span class="card-title text-primary">Forgot password?</span>
+      <div class="text-secondary">
+        <p>Please fill in your email address and you will receive an 
+        email with a password activation link for your account.</p>
+        <br/>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <i class="material-icons prefix">person</i>
+          <%= f.label :email, class: "active" %>
+          <%= f.email_field :email, class: "validate", placeholder: "mohamed.aaes@gmail.com" %>
+        </div>
+      </div>
+    </div>
+    <div class="card-action">
+      <%= link_to "Reset", "#",
+        {onClick: "$(this).closest('form#forgot-password-form.col.s12').submit()", id: "save-button",
+          class: "modal-action modal-close waves-effect waves-green btn-flat "} %>
+    </div>
+  <% end %>
+</div>
+</div>
+<!-- log-in end -->

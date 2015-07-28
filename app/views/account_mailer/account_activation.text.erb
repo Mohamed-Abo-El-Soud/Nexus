@@ -1,0 +1,5 @@
+Hi <%= @account.first_name %>,
+
+Welcome to the Nexus! Click on the link below to activate your account:
+
+<%= edit_account_activation_url(@account.activation_token, email: @account.email) %>

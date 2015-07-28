@@ -26,12 +26,16 @@ michael:
   email: michael@example.com
   password_digest: <%= Account.digest('password') %>
   admin: true
+  activated: true
+  activated_at: <%= Time.zone.now %>
   
 archer:
   first_name: Sterling
   last_name: Archer
   email: duchess@example.gov
   password_digest: <%= Account.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
   
 
 lana:
@@ -39,12 +43,16 @@ lana:
   last_name: Kane
   email: hands@example.gov
   password_digest: <%= Account.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 mallory:
   first_name: Mallory
   last_name: Archer
   email: boss@example.gov
   password_digest: <%= Account.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 <% 30.times do |n| %>
 account_<%= n %>:
@@ -52,4 +60,6 @@ account_<%= n %>:
   last_name:  <%= "Last-name #{n}" %>
   email: <%= "account-#{n}@example.com" %>
   password_digest: <%= Account.digest('password') %>
+  activated: true
+  activated_at: <%= Time.zone.now %>
 <% end %>

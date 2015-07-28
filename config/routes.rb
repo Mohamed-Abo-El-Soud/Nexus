@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   # get 'accounts/new'
 
   # get 'accounts/search'
@@ -26,60 +30,31 @@ Rails.application.routes.draw do
   
   resources :accounts
   
-  # this is a test to make sure forked it right
+  resources :account_activations, only: [:edit]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
   
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+#                   Prefix Verb   URI Pattern                             Controller#Action
+#     password_resets_new GET    /password_resets/new(.:format)          password_resets#new
+#   password_resets_edit GET    /password_resets/edit(.:format)         password_resets#edit
+#                   about GET    /about(.:format)                        static_pages#about
+#                 contact GET    /contact(.:format)                      static_pages#contact
+#                   help GET    /help(.:format)                         static_pages#help
+#                   root GET    /                                       static_pages#home
+#                   login POST   /login(.:format)                        sessions#create
+#                 logout DELETE /logout(.:format)                       sessions#destroy
+#               accounts GET    /accounts(.:format)                     accounts#index
+#                         POST   /accounts(.:format)                     accounts#create
+#             new_account GET    /accounts/new(.:format)                 accounts#new
+#           edit_account GET    /accounts/:id/edit(.:format)            accounts#edit
+#                 account GET    /accounts/:id(.:format)                 accounts#show
+#                         PATCH  /accounts/:id(.:format)                 accounts#update
+#                         PUT    /accounts/:id(.:format)                 accounts#update
+#                         DELETE /accounts/:id(.:format)                 accounts#destroy
+# edit_account_activation GET    /account_activations/:id/edit(.:format) account_activations#edit
+#         password_resets POST   /password_resets(.:format)              password_resets#create
+#     new_password_reset GET    /password_resets/new(.:format)          password_resets#new
+#     edit_password_reset GET    /password_resets/:id/edit(.:format)     password_resets#edit
+#         password_reset PATCH  /password_resets/:id(.:format)          password_resets#update
+#                         PUT    /password_resets/:id(.:format)          password_resets#update
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end

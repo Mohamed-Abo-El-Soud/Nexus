@@ -13,7 +13,9 @@ Account.create!(first_name: "Example",
                telephone: "41683229083",
                password: "foobar",
                password_confirmation: "foobar",
-               admin: true)
+               admin: true,
+               activated: true,
+               activated_at: Time.zone.now)
                
 
 99.times do |n|
@@ -22,8 +24,10 @@ Account.create!(first_name: "Example",
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
   Account.create!(first_name: first_name,
-               last_name: last_name,
-               email: email,
-               password:              password,
-               password_confirmation: password)
+                 last_name: last_name,
+                 email: email,
+                 password:              password,
+                 password_confirmation: password,
+                 activated: true,
+                 activated_at: Time.zone.now)
 end
