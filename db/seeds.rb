@@ -8,14 +8,14 @@
 
 
 Account.create!(first_name: "Example",
-               last_name: "User",
-               email: "example@railstutorial.org",
-               telephone: "41683229083",
-               password: "foobar",
-               password_confirmation: "foobar",
-               admin: true,
-               activated: true,
-               activated_at: Time.zone.now)
+              last_name: "User",
+              email: "example@railstutorial.org",
+              telephone: "41683229083",
+              password: "foobar",
+              password_confirmation: "foobar",
+              admin: true,
+              activated: true,
+              activated_at: Time.zone.now)
                
 
 99.times do |n|
@@ -24,10 +24,17 @@ Account.create!(first_name: "Example",
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
   Account.create!(first_name: first_name,
-                 last_name: last_name,
-                 email: email,
-                 password:              password,
-                 password_confirmation: password,
-                 activated: true,
-                 activated_at: Time.zone.now)
+                last_name: last_name,
+                email: email,
+                password:              password,
+                password_confirmation: password,
+                activated: true,
+                activated_at: Time.zone.now)
+end
+
+accounts = Account.order(:created_at).take(6)
+50.times do
+  title = Faker::Lorem.word
+  content = Faker::Lorem.sentence(5)
+  accounts.each { |account| account.messages.create!(reciever_id: 0, title: title, content: content) }
 end

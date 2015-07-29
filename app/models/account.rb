@@ -4,7 +4,9 @@ class Account < ActiveRecord::Base
   before_create :create_activation_digest
   # attr_accessor :first_name, :email
   # the messages that the account might send are not dependent on the account itself
-  has_many :messages#, dependent: :destroy
+  # the foreign_key ensures the that when we pull out messages from the account
+  # ie: <account>.messages
+  has_many :messages, foreign_key: "sender_id"
   validates :first_name,  presence: true, length: { maximum: 50 }
   validates :last_name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

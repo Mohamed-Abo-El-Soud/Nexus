@@ -28,6 +28,16 @@ class ActiveSupport::TestCase
     end
   end
   
+  module FixtureFileHelpers
+    def rand_num(min,max,exception,halt=0)
+      raise if halt == 3
+      n = Range.new(min, max).to_a.sample
+      rand_num(min,max,exception,halt+1) if n == exception
+      n
+    end
+  end
+  ActiveRecord::FixtureSet.context_class.send :include, FixtureFileHelpers
+  
   private
 
     # Returns true inside an integration test.

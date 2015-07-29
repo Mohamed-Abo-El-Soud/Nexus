@@ -1,20 +1,53 @@
 <% provide(:title, @account.first_name) %>
 
-
 <% unless @account_edit_attempt.nil? %>
+  <% raise %>
   <% unless @account_edit_attempt %>
+    <% raise %>
     <script>
       $('#settings').openModal();
     </script>
   <% end %>
 <% end %>
 
-
-<h1>
-  <%= gravatar_for @account %>
-  <%= @account.first_name %>
-</h1>
-<ul>
-  <li><%= @account.first_name %> <%= @account.last_name %></li>
-  <li><%= @account.email %></li>
-</ul>
+<div class="row">
+  <br/>
+  <aside class="col s12 m5">
+    <section class="card user_info">
+      <div class="col s12">
+        <div class="row card-content">
+          <h1 class="card-title text-accent">
+            <span class="huge">
+              <%= @account.first_name %>
+            </span>
+          </h1>
+          <%= gravatar_for @account, size: 200, class: "col s4" %>
+          <ul class="col s8">
+            <li><%= @account.first_name %> <%= @account.last_name %></li>
+            <li><%= @account.email %></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </aside>
+  <% if @account.messages.any? %>
+    <h3>Messages (<%= @account.messages.count %>)</h3>
+    <!-- content -->
+    <div class="col s12 m7 lighten-2 messages">
+      <%= render "shared/content", label_color: "dark",
+                                   label_text_color: "primary-light" %>
+      <%= pagination_change @messages %>
+    </div>
+    <!-- content end -->
+    <% end %>
+  <div class="hide col s12 m7">
+    <% if @account.messages.any? %>
+      <h3>Messages (<%= @account.messages.count %>)</h3>
+      <ol class="messages">
+        <%= render @messages %>
+      </ol>
+      <%= pagination_change @messages %>
+      <%  # @messages %>
+    <% end %>
+  </div>
+</div>

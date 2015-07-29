@@ -6,6 +6,7 @@ class AccountsController < ApplicationController
   def show
     # debugger
     @account = Account.find(params[:id])
+    @messages = @account.messages.paginate(page: params[:page])
   end
   
   def index

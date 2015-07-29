@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'messages/inbox'
+
+  get 'messages/sent'
+
+  get 'messages/spam'
+
+  get 'messages/trash'
+
   get 'password_resets/new'
 
   get 'password_resets/edit'

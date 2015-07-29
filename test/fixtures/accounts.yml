@@ -55,6 +55,7 @@ mallory:
   activated_at: <%= Time.zone.now %>
 
 <% 30.times do |n| %>
+<% k=[] %>
 account_<%= n %>:
   first_name:  <%= "Account #{n}" %>
   last_name:  <%= "Last-name #{n}" %>
