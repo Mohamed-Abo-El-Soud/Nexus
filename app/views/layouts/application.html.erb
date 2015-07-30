@@ -9,7 +9,7 @@
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
 </head>
-<body class="dark">
+<body class="dark <%= val = yield(:body) || 'dark' %>">
 
 <% unless logged_in? %>
   <%= render "layouts/modals/sign_up" %>

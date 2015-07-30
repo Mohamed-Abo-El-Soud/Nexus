@@ -1,0 +1,32 @@
+<div id="show-message-<%= message.id %>" class="modal front text-primary modal-fixed-footer bottom-sheet">
+      <div class="modal-content">
+      <div class="container">
+        <% sender = Account.find(message.sender_id) %>
+        <% reciever = Account.find(message.reciever_id) %>
+        <div class="row col">
+          <h4 id="title"><%= message.title %></h4>
+          <div class="col">
+            <%= gravatar_for sender %>
+          </div>
+          <div class="row col">
+            <div class="">
+              <p id="sender">
+              <b class="tooltipped" data-position="bottom" 
+                 data-delay="50" data-tooltip="<%= sender.email %>"><%= sender.first_name %> <%= sender.last_name %></b>
+              </p>
+            </div>
+            <div class="text-secondary">
+              <p id="reciever" >to <b class="tooltipped" data-position="bottom" 
+                 data-delay="50" data-tooltip="<%= reciever.email %>"><%= reciever.first_name %></b></p>
+            </div>
+          </div>
+        </div>
+        <div class="row col s8 m6 offset-m1 s12">
+          <p id="content"><%= message.content %></p>
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" id="cancel-button" class=" modal-action modal-close waves-effect waves-green btn-flat">Back</a>
+      </div>
+</div>

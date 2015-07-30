@@ -12,7 +12,13 @@ module ApplicationHelper
   
   def pagination_change(collection)
     
-    doc = Nokogiri::HTML(will_paginate collection)
+    paginated_collection = will_paginate collection
+    
+    if paginated_collection.nil?
+      return
+    end
+    
+    doc = Nokogiri::HTML(paginated_collection)
     
     wrapper = doc.at_css ".pagination"
     

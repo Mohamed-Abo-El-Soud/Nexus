@@ -10,4 +10,5 @@ class MessagesController < ApplicationController
 
   def trash
   end
+  
 end

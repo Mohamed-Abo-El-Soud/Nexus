@@ -1,15 +1,6 @@
 <% provide(:title, @account.first_name) %>
 
-<% unless @account_edit_attempt.nil? %>
-  <% raise %>
-  <% unless @account_edit_attempt %>
-    <% raise %>
-    <script>
-      $('#settings').openModal();
-    </script>
-  <% end %>
-<% end %>
-
+<% provide(:body, "grey lighten-2") %>
 <div class="row">
   <br/>
   <aside class="col s12 m5">
@@ -31,23 +22,14 @@
     </section>
   </aside>
   <% if @account.messages.any? %>
-    <h3>Messages (<%= @account.messages.count %>)</h3>
     <!-- content -->
-    <div class="col s12 m7 lighten-2 messages">
-      <%= render "shared/content", label_color: "dark",
-                                   label_text_color: "primary-light" %>
-      <%= pagination_change @messages %>
+    <div id="content" class="col s12 m7 grey lighten-2">
+    <h3 id="messages-count" class="text-secondary">Messages (<%= @account.messages.count %>)</h3>
+      <div class="messages">
+        <%= render "shared/content" %>
+        <%= pagination_change @messages %>
+      </div>
     </div>
     <!-- content end -->
     <% end %>
-  <div class="hide col s12 m7">
-    <% if @account.messages.any? %>
-      <h3>Messages (<%= @account.messages.count %>)</h3>
-      <ol class="messages">
-        <%= render @messages %>
-      </ol>
-      <%= pagination_change @messages %>
-      <%  # @messages %>
-    <% end %>
-  </div>
 </div>

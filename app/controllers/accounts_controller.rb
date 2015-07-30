@@ -3,6 +3,8 @@ class AccountsController < ApplicationController
   before_action :correct_account,   only: [:edit, :update]
   before_action :admin_account,     only: :destroy
   
+  include MessagesHelper
+  
   def show
     # debugger
     @account = Account.find(params[:id])

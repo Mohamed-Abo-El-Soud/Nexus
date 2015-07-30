@@ -1,80 +1,17 @@
 <!--messages-->
-<div class="container0">
-  <ul class="collection">
-    <li class="collection-item <%= label_color ||= 'grey lighten-2' %> <%= label_text_color ||= 'grey-text text-darken-1' %>">
-      <b>Today</b>
-    </li>
-    <!--Today-->
-    <div class="card hide">
-      <!-- email-1 -->
-      <div class="card-wrapper">
-        <a href="#!" class="waves-effect waves-circle waves-light btn-floating secondary-content">
-          <i class="mdi-action-grade"></i>
-        </a> 
-        <a href="#!" class="collection-item avatar">
-          <img src="http://www.skincare-centre.com/wp-content/uploads/2012/04/Male-Face-3.jpg" class="circle responsive-img">
-          <!--email content-->
-          <b class="title">Announcing new employee</b>
-          <p class="grey-text">John Stamos</p>
-          <p class="grey-text text-darken-3 truncate">Referring our previous conversation about my position at the company, I have decided to inform you that I resign as your CEO. It was not an easy decision to make, but I believe that is the right option for me and my future career plans... </p>
-          <!--end email content-->
-        </a>
-      </div>
-      <!-- end email-1 -->
-      <!-- email-2 -->
-      <div class="card-wrapper">
-        <a href="#!" class="waves-effect waves-circle waves-light btn-floating secondary-content">
-          <i class="mdi-action-grade"></i>
-        </a> 
-        <a href="#!" class="collection-item avatar">
-          <img src="http://blog.powerlinx.com/wp-content/uploads/2014/03/shaking-hands-picture.jpg" class="circle responsive-img">
-          <!--email content-->
-          <b class="title">Company Event</b>
-          <p class="grey-text">Kyle Bens</p>
-          <p class="grey-text text-darken-3 truncate">Thank you very much for the experience that you have given to me, especially for the work on the company’s project Construction... </p>
-          <!--end email content-->
-        </a>
-      </div>
-      <!-- end email-2 -->
-      <!-- email-3 -->
-      <div class="card-wrapper">
-        <a href="#!" class="waves-effect waves-circle waves-light btn-floating secondary-content">
-          <i class="mdi-action-grade"></i>
-        </a> 
-        <a href="#!" class="collection-item avatar">
-          <img src="http://www.fabulousfaces.com/lib/upload/lrp2210.jpg" class="circle responsive-img">
-          <!--email content-->
-          <b class="title">We've Moved!</b>
-          <p class="grey-text">Mark Evans</p>
-          <p class="grey-text text-darken-3 truncate">Referring our previous conversation about my position at the company, I have decided to inform you that I resign as your CEO. It was not an easy decision to make, but I believe that is the right option for me and my future career plans...</p>
-          <!--end email content-->
-        </a>
-      </div>
-      <!-- end email-3 -->
-    </div>
-    <div class="card">
-      <!-- email-1 -->
-      <div class="card-wrapper">
-        <a href="#!" class="waves-effect waves-circle waves-light btn-floating secondary-content">
-          <i class="mdi-action-grade"></i>
-        </a> 
-        <a href="#!" class="collection-item avatar">
-          <img src="http://www.skincare-centre.com/wp-content/uploads/2012/04/Male-Face-3.jpg" class="circle responsive-img">
-          <!--email content-->
-          <b class="title">Announcing new employee</b>
-          <p class="grey-text">John Stamos</p>
-          <p class="grey-text text-darken-3 truncate">Referring our previous conversation about my position at the company, I have decided to inform you that I resign as your CEO. It was not an easy decision to make, but I believe that is the right option for me and my future career plans... </p>
-          <!--end email content-->
-        </a>
-      </div>
-      <!-- end email-1 -->
-      <!-- email -->
-      <%= render @messages%>
-      <!-- end email -->
-    </div>
-    <!--end Today-->
-    <li class="collection-item grey lighten-2 grey-text text-darken-1">
-      <b>Yesterday</b></li>
-  </ul>
-</div>
+<ul class="collection">
+  <li id="today-label" class="collection-item <%= label_color ||= 'grey lighten-2' %> <%= label_text_color ||= 'grey-text text-darken-1' %>">
+    <b>Today</b>
+  </li>
+  <!--Today-->
+  <div class="card">
+    <% debugger %>
+    <!-- email -->
+    <%= render @messages%>
+    <!-- end email -->
+  </div>
+  <!--end Today-->
+  <li class="collection-item grey lighten-2 grey-text text-darken-1">
+    <b>Yesterday</b></li>
+</ul>
 <!--messages end-->

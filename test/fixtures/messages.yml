@@ -9,6 +9,7 @@ steve_mail:
   reciever: mad
   title: "Furniture"
   content: "Hello Mad, I'd like to talk to you about the furniture. How much are you offering? Thanks, Steve"
+  created_at: <%= 2.hours.ago %>
 #
 
 
@@ -26,7 +27,8 @@ max_mail:
   content: "Good morning Steve. How does 5000 sound? Let me know if that is too low. Regards, Mad"
   created_at: <%= 1.hours.ago %>
   
-  
+
+<% if false %>  
 
 <% 30.times do |n| %>
 <% k = [] %>
@@ -38,4 +40,6 @@ message_<%= n %>:
   title: <%= Faker::Lorem.word %>
   content: <%= Faker::Lorem.sentence %>
   created_at: <%= (n+1).hours.ago %>
+<% end %>
+
 <% end %>

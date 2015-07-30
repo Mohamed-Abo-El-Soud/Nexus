@@ -11,7 +11,7 @@ class AccountsIndexTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     get accounts_path
     assert_template 'accounts/index'
-    assert_select 'ul.pagination'
+    assert_select 'ul.collection'
     first_page_of_accounts = Account.paginate(page: 1)
     first_page_of_accounts.each do |account|
       assert_select 'a[href=?]', account_path(account), text: "#{account.first_name} #{account.last_name}"

@@ -38,6 +38,15 @@ class ActiveSupport::TestCase
   end
   ActiveRecord::FixtureSet.context_class.send :include, FixtureFileHelpers
   
+  def insert_messages
+    accounts_6 = Account.order(:created_at).take(6)
+    10.times do |n|
+      title = Faker::Lorem.word
+      content = Faker::Lorem.sentence(5)
+      accounts_6.each { |account| account.messages.create!(reciever_id: n, title: title, content: content) }
+    end
+  end
+    
   private
 
     # Returns true inside an integration test.

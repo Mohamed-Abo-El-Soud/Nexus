@@ -1,61 +1,19 @@
 
 <div class="card-wrapper">
-  <%= link_to "#new-message", class: "waves-effect waves-circle waves-light btn-floating secondary-content modal-trigger" do %>
-    <i class="mdi-action-grade"></i>
+  <%= link_to "#show-message-#{message.id}", class: "waves-effect waves-circle waves-light btn-floating secondary-content modal-trigger" do %>
+    <i class="text-primary-light mdi-action-grade"></i>
   <% end %>
-  <%= link_to "#new-message", class: "collection-item avatar modal-trigger" do %>
-    <% account = Account.find(message.sender_id) %>
-    <%= gravatar_for account, class: "circle responsive-img" %>
+  <%= link_to "#show-message-#{message.id}", class: "collection-item avatar modal-trigger" do %>
+    <% sender = Account.find(message.sender_id) %>
+    <%= gravatar_for sender, class: "circle responsive-img" %>
     <!--email content-->
-    <b class="title"><%= message.title %></b>
-    <p class="grey-text"><%= account.first_name %> <%= account.last_name %></p>
+    <b id="title" class="title"><%= message.title %></b>
+    <p id="sende" class="grey-text"><%= sender.first_name %> <%= sender.last_name %></p>
     <p class="grey-text text-darken-3 truncate"><%= message.content %> </p>
     <!--end email content-->
   <% end %>
   
-  <div id="new-message" class="modal front text-primary">
-    <%= form_for(message, url: messages_inbox_path, html: {class: "col s12", id: "new-message-form"}) do |f| %>
-        <div class="modal-content">
-          <h4>New message</h4>
-          <%= render 'shared/error_messages', subject: message %>
-          <div class="row">
-            <div class="input-field col s12">
-              <%= f.label :title, class: "active" %>
-              <%= f.text_field :title, class: "validate" %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <%= f.label :sender_id, class: "active" %>
-              <%= f.text_area :sender_id, value: @account.email, class: "validate" %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <%= f.label :reciever_id, class: "active" %>
-              <%= f.number_field :reciever_id, class: "validate" %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <%= f.label :content, class: "active" %>
-              <%= f.text_area :content, class: "validate" %>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <%= link_to "Send", "#",
-            {onClick: "$(this).closest('form.col.s12').submit()", id: "save-button",
-              class: "modal-action modal-close waves-effect waves-green btn-flat"} %>
-          <%= link_to "#", {onClick: "$(this).closest('form.col.s12').submit()", id: "save-button",
-              class: "modal-action modal-close waves-effect waves-green btn-flat"} do %>
-              <i class="material-icons right">send</i>
-              Send
-              <% end %>
-          <a href="#!" id="cancel-button" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-        </div>
-    <% end %>
-  </div>
+  <%= render "messages/show_message", message: message%>
 </div>
 
 

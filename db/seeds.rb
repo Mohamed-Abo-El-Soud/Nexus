@@ -33,8 +33,8 @@ Account.create!(first_name: "Example",
 end
 
 accounts = Account.order(:created_at).take(6)
-50.times do
+50.times do |n|
   title = Faker::Lorem.word
   content = Faker::Lorem.sentence(5)
-  accounts.each { |account| account.messages.create!(reciever_id: 0, title: title, content: content) }
+  accounts.each { |account| account.messages.create!(reciever_id: n, title: title, content: content) }
 end
