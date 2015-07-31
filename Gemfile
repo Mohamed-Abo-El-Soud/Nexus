@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.2'
 # console formatting
-gem 'hirb'
+# gem 'hirb'
+gem "table_print"
 # html parsing for input field errors (when user puts invalid info so sign up)
 gem 'nokogiri'
 # password encryption
