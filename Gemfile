@@ -13,6 +13,8 @@ gem 'bcrypt', '3.1.7'
 gem 'faker',                '1.4.2'
 # pagination
 gem 'will_paginate',           '3.0.7'
+# group data by date
+# gem 'groupdate'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
