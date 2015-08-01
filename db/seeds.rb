@@ -36,5 +36,7 @@ accounts = Account.order(:created_at).take(6)
 50.times do |n|
   title = Faker::Lorem.word
   content = Faker::Lorem.sentence(5)
-  accounts.each { |account| account.messages.create!(reciever_id: n, title: title, content: content) }
+  accounts.each do |account|
+    account.messages.create!(reciever_id: n, title: title, content: content, created_at: n.days.ago) 
+  end
 end
