@@ -50,3 +50,5 @@ $(document).ready ()->
       if (/^\s*$/).test input.val()
         if !(/^\s*$/).test email
           input.val(email).siblings("label").addClass "active"
+    
+    $(".timeago").timeago()

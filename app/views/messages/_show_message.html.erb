@@ -1,5 +1,5 @@
 <div id="show-message-<%= message.id %>" class="modal front text-primary modal-fixed-footer bottom-sheet">
-      <div class="modal-content">
+    <div class="modal-content">
       <div class="container">
         <% sender = Account.find(message.sender_id) %>
         <% reciever = Account.find(message.reciever_id) %>
@@ -20,13 +20,18 @@
                  data-delay="50" data-tooltip="<%= reciever.email %>"><%= reciever.first_name %></b></p>
             </div>
           </div>
+          <%# debugger %>
+          <!--
+          <p id=""><%= time_ago_in_words message.created_at %></p>
+          -->
+          <p id=""><%= timeago message.created_at %></p>
         </div>
         <div class="row col s8 m6 offset-m1 s12">
           <p id="content"><%= message.content %></p>
         </div>
       </div>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" id="cancel-button" class=" modal-action modal-close waves-effect waves-green btn-flat">Back</a>
-      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" id="cancel-button" class=" modal-action modal-close waves-effect waves-green btn-flat">Back</a>
+    </div>
 </div>

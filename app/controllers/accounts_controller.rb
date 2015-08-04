@@ -2,6 +2,7 @@ class AccountsController < ApplicationController
   before_action :logged_in_account, only: [:index, :edit, :update, :destroy]
   before_action :correct_account,   only: [:edit, :update]
   before_action :admin_account,     only: :destroy
+  before_action :build_message,     only: :show
   
   include MessagesHelper
   
@@ -61,15 +62,6 @@ class AccountsController < ApplicationController
       params.require(:account).permit(:first_name, :last_name,
                                    :email, :telephone, :password,
                                    :password_confirmation)
-    end
-    
-    def logged_in_account
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        flash[:open_modal] = "#log-in"
-        redirect_to root_url
-      end
     end
     
     def correct_account

@@ -1,26 +1,8 @@
 <!--messages-->
 <ul class="collection">
   
-  <%# initialize_time_sort %>
-  <%# categorize @messages  %>
+  <% roster = initialize_time_sort messages%>
 
-  <li id="today-label" class="collection-item <%= label_color ||= 'grey lighten-2' %> <%= label_text_color ||= 'grey-text text-darken-1' %>">
-    <b>Today</b>
-  </li>
-  <!--Today-->
-  <div class="card">
-    <%# debugger %>
-    <!-- email -->
-    <%= render @messages%>
-    <!-- end email -->
-  </div>
-  <!--end Today-->
-  
-  
-  
-  
-  
-  <li class="collection-item grey lighten-2 grey-text text-darken-1">
-    <b>Yesterday</b></li>
-</ul>
+  <%= display_time_sort roster, show_sender: show_sender %>
+
 <!--messages end-->

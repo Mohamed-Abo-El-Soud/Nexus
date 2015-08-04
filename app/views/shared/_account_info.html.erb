@@ -1,0 +1,20 @@
+<section class="card user_info">
+  <div class="col s12">
+    <div class="row card-content">
+      <h1 class="card-title text-accent">
+        <span class="huge">
+          <%= account.first_name %>
+        </span>
+      </h1>
+      <%= gravatar_for account, size: 200, class: "col s4" %>
+      <ul class="collection center-align ">
+        <li class="collection-item"><%= account.first_name %> <%= account.last_name %></li>
+        <li class="collection-item"><%= account.email %></li>
+        <li class="collection-item">
+          <%= link_to "new message", "#new-message", class: " modal-trigger btn-flat accent col s12 row" %>
+          <%= render "messages/new_message", message: @message, reciever: nil %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

@@ -73,9 +73,9 @@ class MessagesViewTest < ActionDispatch::IntegrationTest
       assert_select ".modal #content", text: message.content
     end
   end
-  
-  test "group_by functionality works" do
-    
+#=begin
+  test "time_sort: group_by functionality works" do
+   
     current_time = Time.new(2015,7,2).beginning_of_day
     
     5.times do |n|
@@ -110,7 +110,7 @@ class MessagesViewTest < ActionDispatch::IntegrationTest
     assert_equal by_year.count, 1
   end
   
-  test "prior elimination and sorting functionality works" do
+  test "time_sort: prior elimination and sorting functionality works" do
     
     current_time = Time.new(2015,7,1,4)#.beginning_of_day
     
@@ -166,133 +166,64 @@ class MessagesViewTest < ActionDispatch::IntegrationTest
     
   end
   
-  # test "2 prior elimination and sorting functionality works" do
+#=end  
+  test "time_sort: should provide accurate information" do
+   
+    current_time = Time.new(2015,7,2).beginning_of_day
     
-  #   current_time = Time.new(2015,7,2,4)#.beginning_of_day
+    5.times do |n|
+      @account.messages.create!(reciever_id: 1,
+                                title: "test-accurate",
+                                content: Faker::Lorem.sentence(5),
+                                created_at: current_time + n.seconds)
+    end
     
-  #   beginning_of_day = current_time.beginning_of_day
+    3.times do |n|
+      @account.messages.create!(reciever_id: 1,
+                                title: "test-accurate",
+                                content: Faker::Lorem.sentence(5),
+                                created_at: (current_time - 1.day) + n.seconds)
+    end
     
-  #   time_today = beginning_of_day
-  #   time_yesterday = (beginning_of_day - 1.days)
-  #   time_last_month = (beginning_of_day - 1.months).beginning_of_month
+    4.times do |n|
+      @account.messages.create!(reciever_id: 1,
+                                title: "test-accurate",
+                                content: Faker::Lorem.sentence(5),
+                                created_at: (current_time - 1.month) + n.seconds)
+    end
     
-  #   mes_1 = {created_at: Time.new(2015,7,2,8),content:"today's content"}
-  #   mes_2 = {created_at: Time.new(2015,7,2,3),content:"yesterday's content"}
-  #   mes_3 = {created_at: Time.new(2015,7,2,11),content:"last night's content"}
-  #   mes_4 = {created_at: Time.new(2015,6,7,10),content:"few days back's content"}
+    messages = Message.where title: "test-accurate"
     
-  #   original = [mes_1, mes_2, mes_3, mes_4]
+    assert_equal messages.where(created_at: current_time...(current_time + 1.day)).count, 5
+    assert_equal messages.where(created_at: (current_time - 1.day)...current_time).count, 3
+    assert_equal messages.where(created_at: (current_time - 1.month)...(current_time - 1.day)).count, 4
     
-  #   a = ["Today", {Time.new(2015,7,1) => [mes_1]} ]
-  #   b = ["Yesterday", {Time.new(2015,6,30) => [mes_2, mes_3] } ]
-  #   c = ["Last Month", {Time.new(2015,6,1) => [mes_2, mes_3, mes_4] } ]
+    assert messages.any?
     
-  #   b_last = ["Yesterday", {}]
+    assert_equal messages.count, 12
     
-  #   by_day = original.group_by { |m|   m[:created_at].beginning_of_day }
-  #   by_month = original.group_by { |m| m[:created_at].beginning_of_month }
+    roster = initialize_time_sort messages, current_time: current_time
     
-  #   a_sorted = ["Today", time_today => by_day[time_today] ]  # => 0
-  #   b_sorted = ["Yesterday", time_yesterday => by_day[time_yesterday] ]  # => 1
-  #   c_sorted = ["Last Month", time_last_month => by_month[time_last_month] ]  # => 2
-  #   assert_equal a,a_sorted
-  #   assert_equal b,b_sorted
-  #   assert_equal c,c_sorted
+    assert_not_nil roster
+    # puts "hey!!"
+    # puts roster
+    # roster.each do |item|
+    #   puts item[0]
+    # end
+    # puts "hey!!"
+    assert_equal roster.count, 3
+    assert_equal roster[0][0] , "Today"
+    assert_equal roster[1][0] , "Yesterday"
+    assert_equal roster[2][0] , "Last Month"
     
-  #   # puts by_month[time_last_month]
-  #   # puts "and"
-  #   # puts c
+    assert roster[0][1]
+    assert roster[1][1]
+    assert roster[2][1]
     
-  #   result = {}
-  #   b_sorted[1].each do |key, value|
-  #     # puts key.beginning_of_month
-  #     # # puts time_last_month == key.beginning_of_month
-  #     # puts c[1]#[time_last_month]
-  #     # puts c[1][key.beginning_of_month]
-  #     key_broad = key.beginning_of_month
-  #     unless c[1][key_broad]
-  #       result[key] = value
-  #     end
-  #   end
-  #   b_sorted[1] = result
-    
-    
-    
-  #   assert_equal b_sorted,b_last
-    
-  # end
-  
-  # test "time_sort should provide accurate information" do
-    
-  #   # now = Time.zone.now
-  #   # today = 1.days.ago
-  #   # yesterday = 2.days.ago
-  #   # this_month = 1.months.ago
-  #   # 20_years_ago = 20.years.ago
-    
-  #   # assert (@times[0][1] - now) < 2
-  #   # assert (@times[1][1] - today) < 2
-  #   # assert (@times[2][1] - yesterday) < 2
-  #   # assert (@times[3][1] - this_month) < 2
-  #   # assert (@times[34][1] - 20_years_ago) < 2
-  
-  #   current_time = Time.new(2015,7,2).beginning_of_day
-    
-  #   5.times do |n|
-  #     @account.messages.create!(reciever_id: 1,
-  #                               title: "test-accurate",
-  #                               content: Faker::Lorem.sentence(5),
-  #                               created_at: current_time + n.seconds)
-  #   end
-    
-  #   3.times do |n|
-  #     @account.messages.create!(reciever_id: 1,
-  #                               title: "test-accurate",
-  #                               content: Faker::Lorem.sentence(5),
-  #                               created_at: (current_time - 1.day) + n.seconds)
-  #   end
-    
-  #   4.times do |n|
-  #     @account.messages.create!(reciever_id: 1,
-  #                               title: "test-accurate",
-  #                               content: Faker::Lorem.sentence(5),
-  #                               created_at: (current_time - 1.month) + n.seconds)
-  #   end
-    
-  #   messages = Message.where title: "test-accurate"
-    
-  #   assert_equal messages.where(created_at: current_time...(current_time + 1.day)).count, 5
-  #   assert_equal messages.where(created_at: (current_time - 1.day)...current_time).count, 3
-  #   assert_equal messages.where(created_at: (current_time - 1.month)...(current_time - 1.day)).count, 4
-    
-  #   assert messages.any?
-    
-  #   assert_equal messages.count, 12
-    
-  #   roster = initialize_time_sort_2 messages, current_time: current_time
-    
-  #   assert_not_nil roster
-  #   # puts "hey!!"
-  #   # puts roster
-  #   # roster.each do |item|
-  #   #   puts item[0]
-  #   # end
-  #   # puts "hey!!"
-  #   assert_equal roster.count, 3
-  #   assert_equal roster[0][0] , "Today"
-  #   assert_equal roster[1][0] , "Yesterday"
-  #   assert_equal roster[2][0] , "Last Month"
-    
-  #   assert roster[0][1]
-  #   assert roster[1][1]
-  #   assert roster[2][1]
-    
-  #   assert_equal roster[0][1].count, 5
-  #   assert_equal roster[1][1].count, 3
-  #   assert_equal roster[2][1].count, 4
-  # end
-  
-  
+    assert_equal roster[0][1].count, 5
+    assert_equal roster[1][1].count, 3
+    assert_equal roster[2][1].count, 4
+  end
   
   test "time_sort: when today is the beginning of the month, the day before should be last month and not yesterday" do
     current_time = Time.new(2015,7,1)
@@ -317,7 +248,7 @@ class MessagesViewTest < ActionDispatch::IntegrationTest
     
     # assert_equal messages.count, 14
     
-    roster = initialize_time_sort_2 messages, current_time: current_time
+    roster = initialize_time_sort messages, current_time: current_time
     
     # puts roster
     
@@ -327,9 +258,7 @@ class MessagesViewTest < ActionDispatch::IntegrationTest
     assert_equal roster[0][1].count, 6
     assert_equal roster[1][1].count, 8
     
-    
   end
-  
   
   test "time_sort: when today is the beginning of the year, the day before should be Year and not yesterday or last month" do
     current_time = Time.new(2015,1,1)
@@ -352,9 +281,9 @@ class MessagesViewTest < ActionDispatch::IntegrationTest
     
     assert messages.any?
     
-    assert_equal messages.count, 14
+    assert_equal messages.count, 10
     
-    roster = initialize_time_sort_2 messages, current_time: current_time
+    roster = initialize_time_sort messages, current_time: current_time
     
     assert_equal roster.count, 2
     assert_equal roster[0][0], "Today"
@@ -363,32 +292,5 @@ class MessagesViewTest < ActionDispatch::IntegrationTest
     assert_equal roster[1][1].count, 3
     
   end
-  
-  
-  
-  
-  
-  
-  
-#   test "first message created must be at least a month old" do
-#     this_month = 1.months.ago
-#     message = Message.last
-#     assert message.created_at.to_time < this_month
-#   end
-  
-#   test "time_sort categorize should effectively categorize the messages into 3 parts" do
-#     messages = Message.all
-#     categorize messages
-#     now = Time.zone.now
-#     today = 1.days.ago
-#     yesterday = 2.days.ago
-#     this_month = 1.months.ago
-#     last_month = 2.months.ago
-#     assert @pieces[0].count
-#     assert @pieces[0] == messages.where(created_at: now..today)
-#     assert @pieces[1].count
-#     assert @pieces[1] == messages.where(created_at: today..yesterday)
-#     assert @pieces[2].count
-#     assert @pieces[2] == messages.where(created_at: now..today)
   
 end

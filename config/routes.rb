@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :messages, only: [:create]
+  
   get 'messages/inbox'
 
   get 'messages/sent'

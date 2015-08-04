@@ -1,18 +1,29 @@
 
-<div class="card-wrapper">
-  <%= link_to "#show-message-#{message.id}", class: "waves-effect waves-circle waves-light btn-floating secondary-content modal-trigger" do %>
-    <i class="text-primary-light mdi-action-grade"></i>
+<!-- the valign-wrapper works similar to the row class in this case -->
+<div class="card-wrapper ">
+  <% if false%>
+    <%= link_to "#show-message-#{message.id}", class: "waves-effect waves-circle waves-light btn-floating secondary-content modal-trigger" do %>
+      <i class="text-primary-light mdi-action-grade"></i>
+    <% end %>
   <% end %>
-  <%= link_to "#show-message-#{message.id}", class: "collection-item avatar modal-trigger" do %>
+  <%= link_to "#show-message-#{message.id}", class: "collection-item avatar modal-trigger #{'bright' unless defined?(unread) && unread }" do %>
+    <span class="badge">
+    <%= timeago message.created_at, :span, :class => "timeago" %>
+      <% if defined?(unread) && show_sender %>
+      <br/>
+      <span class="badge new"></span>
+      <% end %>
+    </span>
     <% sender = Account.find(message.sender_id) %>
     <%= gravatar_for sender, class: "circle responsive-img" %>
     <!--email content-->
     <b id="title" class="title"><%= message.title %></b>
-    <p id="sende" class="grey-text"><%= sender.first_name %> <%= sender.last_name %></p>
+    <% if defined?(show_sender) && show_sender %>
+      <p id="sender" class="grey-text"><%= sender.first_name %> <%= sender.last_name %></p>
+    <% end %>
     <p class="grey-text text-darken-3 truncate"><%= message.content %> </p>
     <!--end email content-->
   <% end %>
-  
   <%= render "messages/show_message", message: message%>
 </div>
 

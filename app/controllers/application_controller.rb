@@ -12,10 +12,22 @@ class ApplicationController < ActionController::Base
   
   private
   
-  def check_if_account_present
-    unless logged_in?
-      @account ||= Account.new
+    def check_if_account_present
+      unless logged_in?
+        @account ||= Account.new
+      end
     end
-  end
   
+    def logged_in_account
+      unless logged_in?
+        store_location
+        flash[:danger] = "Please log in."
+        flash[:open_modal] = "#log-in"
+        redirect_to root_url
+      end
+    end
+  
+    def build_message
+      @message = current_account.messages.build if logged_in?
+    end
 end

@@ -1,6 +1,18 @@
-
-
 <% provide(:title, "Home") %>
+
+<% if logged_in? %>
+  <% provide(:body, "grey lighten-2") %>
+  <div class="row">
+    <aside class="col s12 m5">
+      <%= render "shared/account_info", account: current_account %>
+    </aside>
+  </div>
+<% else %>
+
+
+
+
+
 <div id="home" class="row valign-wrapper">
 
   <div class="col s12 l12 center-align valign">
@@ -24,3 +36,4 @@
   </div>
 
 </div>
+<% end %>
