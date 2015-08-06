@@ -8,4 +8,19 @@ class Message < ActiveRecord::Base
   validates :reciever_id, presence: true
   validates :title, presence: true, length: { maximum: 100 }
   validates :content, length: { maximum: 2000 }
+  
+  before_create :make_unread
+  
+    # Converts messages to unread
+    def make_unread
+      self.category = "unread"
+    end
+    
+  # private
+    
+  #   # Converts messages to unread
+  #   def make_unread
+  #     self.category = "unread"
+  #   end
+    
 end

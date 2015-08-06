@@ -4,36 +4,46 @@
   <% provide(:body, "grey lighten-2") %>
   <div class="row">
     <aside class="col s12 m5">
+      <br/>
       <%= render "shared/account_info", account: current_account %>
     </aside>
-  </div>
-<% else %>
-
-
-
-
-
-<div id="home" class="row valign-wrapper">
-
-  <div class="col s12 l12 center-align valign">
-
-    <h1 class="huge slab-font hide-on-small-only">Welcome to Nexus</h1>
-    <h1 class="slab-font hide-on-med-and-up">Welcome to Nexus</h1>
-    <p class="lead">Please sign-up below</p>
-    <form class="col s12 l12">
-      <div class="input-field offset-m3 col m8 s12">
-        <input type="text" class="hide-on-small-only center-align col s12 m8 validate" 
-          title="Enter you email." placeholder="Enter your email address"/>
-          <button data-target="sign-up"
-          class="btn col s5 m3 l2 waves-effect waves-dark btn modal-trigger">
-          Sign Up</button>
-          <button data-target="log-in"
-          class="btn col s5 offset-s2 hide-on-med-and-up waves-effect waves-dark modal-trigger">
-          Log In</button>
+    
+    <% if @feed_items.any? %>
+      <!-- content -->
+      <div id="content" class="col s12 m7 grey lighten-2">
+        <h3 id="messages-count" class="text-secondary">Messages (<%= @feed_items.count %>)</h3>
+        <div class="messages">
+          <%= render "shared/content", messages: @feed_items, show_sender: false %>
+          <br/>
+          <%= pagination_change @feed_items %>
+        </div>
       </div>
-    </form>
+      <!-- content end -->
+    <% end %>
     
   </div>
-
-</div>
+<% else %>
+  <div id="home" class="row valign-wrapper">
+  
+    <div class="col s12 l12 center-align valign">
+  
+      <h1 class="huge slab-font hide-on-small-only">Welcome to Nexus</h1>
+      <h1 class="slab-font hide-on-med-and-up">Welcome to Nexus</h1>
+      <p class="lead">Please sign-up below</p>
+      <form class="col s12 l12">
+        <div class="input-field offset-m3 col m8 s12">
+          <input type="text" class="hide-on-small-only center-align col s12 m8 validate" 
+            title="Enter you email." placeholder="Enter your email address"/>
+            <button data-target="sign-up"
+            class="btn col s5 m3 l2 waves-effect waves-dark btn modal-trigger">
+            Sign Up</button>
+            <button data-target="log-in"
+            class="btn col s5 offset-s2 hide-on-med-and-up waves-effect waves-dark modal-trigger">
+            Log In</button>
+        </div>
+      </form>
+      
+    </div>
+  
+  </div>
 <% end %>

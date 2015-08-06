@@ -2,7 +2,7 @@ class AccountsController < ApplicationController
   before_action :logged_in_account, only: [:index, :edit, :update, :destroy]
   before_action :correct_account,   only: [:edit, :update]
   before_action :admin_account,     only: :destroy
-  before_action :build_message,     only: :show
+  before_action :build_message,     only: [:show, :update]
   
   include MessagesHelper
   

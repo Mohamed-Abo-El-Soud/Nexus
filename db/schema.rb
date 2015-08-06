@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728170118) do
+ActiveRecord::Schema.define(version: 20150805205405) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "first_name"
@@ -39,8 +39,10 @@ ActiveRecord::Schema.define(version: 20150728170118) do
     t.datetime "updated_at",  null: false
     t.integer  "sender_id"
     t.integer  "reciever_id"
+    t.string   "category"
   end
 
+  add_index "messages", ["category"], name: "index_messages_on_category"
   add_index "messages", ["reciever_id", "sender_id", "created_at"], name: "index_messages_on_reciever_id_and_sender_id_and_created_at", unique: true
   add_index "messages", ["reciever_id"], name: "index_messages_on_reciever_id"
   add_index "messages", ["sender_id"], name: "index_messages_on_sender_id"

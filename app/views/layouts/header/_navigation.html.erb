@@ -6,20 +6,23 @@
     </label>
     </a>
   </li>
-  <li><a href="#">
-      <i class="material-icons left">send</i>
-      <span class="hide-on-med-and-down" >Sent</span>
-      </a>
+  <li>
+      <%= link_to sent_path do %>
+        <i class="material-icons left">send</i>
+        <span class="hide-on-med-and-down" >Sent</span>
+      <% end %>
   </li>
-  <li><a href="#">
-      <i class="material-icons left">report_problem</i>
-      <span class="hide-on-med-and-down" >Junk</span>
-      </a>
+  <li>
+      <%= link_to spam_path do %>
+        <i class="material-icons left">report_problem</i>
+        <span class="hide-on-med-and-down" >Junk</span>
+      <% end %>
   </li>
-  <li><a href="#">
-      <i class="material-icons left">delete</i>
-      <span class="hide-on-med-and-down" >Trash</span>
-      </a>
+  <li>
+      <%= link_to trash_path do %>
+        <i class="material-icons left">delete</i>
+        <span class="hide-on-med-and-down" >Trash</span>
+      <% end %>
   </li>
   <li><a data-activates="options" href="#" class="dropdown-button button-options">
       <i class="material-icons left">more_horiz</i>

@@ -1,2 +1,24 @@
-<h1>Messages#trash</h1>
-<p>Find me in app/views/messages/trash.html.erb</p>
+<% provide(:title, "Trash") %>
+<% provide(:logo, "Trash") %>
+
+  <% provide(:body, "grey lighten-2") %>
+  <div class="row">
+    <aside class="col s12 m5">
+      <br/>
+      <h1 class="text-secondary huge slab-font hide-on-small-only">Trash</h1>
+    </aside>
+    
+    <% if @feed_items.any? %>
+      <!-- content -->
+      <div id="content" class="col s12 m7 grey lighten-2">
+        <h3 id="messages-count" class="text-secondary">Messages (<%= @feed_items.count %>)</h3>
+        <div class="messages">
+          <%= render "shared/content", messages: @feed_items, unread: true, show_sender: false %>
+          <br/>
+          <%= pagination_change @feed_items %>
+        </div>
+      </div>
+      <!-- content end -->
+    <% end %>
+    
+  </div>

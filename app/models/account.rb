@@ -73,6 +73,22 @@ class Account < ActiveRecord::Base
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
+  
+  # Defines a proto-feed.
+  def feed
+    Message.where("reciever_id = ?", id)
+  end
+
+  def category(*args)
+    result = ""
+    args.each_with_index do |value, index|
+      or_addition = " OR "
+      or_addition = "" if index == 0
+      result += or_addition + "category = '" + value + "'"
+    end
+    # puts args
+    Message.where(result)
+  end
 
   private
     

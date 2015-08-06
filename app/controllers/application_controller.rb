@@ -28,6 +28,9 @@ class ApplicationController < ActionController::Base
     end
   
     def build_message
-      @message = current_account.messages.build if logged_in?
+      if logged_in?
+        @feed_items = current_account.feed.paginate(page: params[:page])
+        @message = current_account.messages.build
+      end
     end
 end

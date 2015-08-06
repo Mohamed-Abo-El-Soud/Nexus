@@ -29,7 +29,9 @@
   <% flash.each do |message_type, message| %>
     <% if message_type == "open_modal" %>
       <script>
-        $("<%= message %>").openModal();
+        $(document).ready(function () {
+          $("<%= message %>").openModal();
+          });
       </script>
     <% else %>
     <!-- script below assumes such a function exists -->

@@ -11,8 +11,15 @@
         <li class="collection-item"><%= account.first_name %> <%= account.last_name %></li>
         <li class="collection-item"><%= account.email %></li>
         <li class="collection-item">
-          <%= link_to "new message", "#new-message", class: " modal-trigger btn-flat accent col s12 row" %>
-          <%= render "messages/new_message", message: @message, reciever: nil %>
+        <% if logged_in? %>
+          <% if account == current_account %>
+            <%= link_to "new message", "#new-message", class: " modal-trigger btn-flat accent col s12 row" %>
+            <%= render "messages/new_message", message: @message, account: account, reciever: nil %>
+          <% else %>
+            <%= link_to "send message", "#new-message", class: " modal-trigger btn-flat accent col s12 row" %>
+            <%= render "messages/new_message", message: @message, account: current_account, reciever: account %>
+          <% end %>
+        <% end %>
         </li>
       </ul>
     </div>

@@ -43,7 +43,7 @@ class MessagesViewTest < ActionDispatch::IntegrationTest
                                 content: Faker::Lorem.sentence(5))
     end
     
-    # log_in_as(@account)
+    log_in_as(@account)
     get account_path @account
     assert_template 'accounts/show'
     assert @account.messages.any?

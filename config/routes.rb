@@ -2,30 +2,20 @@ Rails.application.routes.draw do
 
   resources :messages, only: [:create]
   
-  get 'messages/inbox'
+  get '/inbox' => 'messages#inbox'
 
-  get 'messages/sent'
+  get '/sent' => 'messages#sent'
 
-  get 'messages/spam'
+  get '/spam' => 'messages#spam'
 
-  get 'messages/trash'
+  get '/trash' => 'messages#trash'
+  
+  get 'make_unread/:id' => "messages#make_unread"
   
   get 'password_resets/new'
 
   get 'password_resets/edit'
-
-  # get 'accounts/new'
-
-  # get 'accounts/search'
-
-  # get 'accounts/inbox'
-
-  # get 'accounts/sent'
-
-  # get 'accounts/spam'
-
-  # get 'accounts/trash'
-
+  
   get '/about' => 'static_pages#about'
 
   get '/contact' => 'static_pages#contact'

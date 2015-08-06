@@ -27,8 +27,8 @@
         <%= render "layouts/header/navigation" %>
         <!-- end right nav desktop -->
         <!--logo-->
-        <a href="/" class="hide-on-med-and-up slab-font brand-logo">Sent</a>
-        <h4 class="hide-on-small-only col s4"><a href="/" class="slab-font">Sent</a></h4>
+        <a href="/" class="hide-on-med-and-up slab-font brand-logo"><%= yield(:logo) || "Nexus" %></a>
+        <h4 class="hide-on-small-only col s4"><a href="/" class="slab-font"><%= yield(:logo) || "Nexus" %></a></h4>
         <!--end logo-->
         <!--side nav-->
         <%= render "layouts/header/side_nav" %>
