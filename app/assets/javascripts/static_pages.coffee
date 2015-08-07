@@ -41,13 +41,7 @@ jQuery.fn.extend makeUnread: ->
         $(that).removeClass "message-unread"
         $(that).addClass "message-read"
         $(that).children(".collection-item.avatar.modal-trigger").removeClass "bright"
-      failure: (data) ->
-        console.log "failure!!"
-      response: ()->
-        console.log "this is a response!"
         
-    
-      
 $(document).ready ()->
   
     $('.modal-trigger').leanModal()
@@ -68,9 +62,6 @@ $(document).ready ()->
     
     $(".timeago").timeago()
     
-    #$("#message-unread").click ->
-      #console.log "woah!"
-      #makeUnread($(this))
     $(".message-unread").click ->
       #console.log $(this)
       $(this).makeUnread()

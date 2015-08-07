@@ -108,7 +108,6 @@ label {
   opacity: $bool;
 }
 
-
 body {
   display: flex;
   min-height: 100vh;
@@ -121,4 +120,8 @@ main {
 
 .toast {
   // @extend .dark, .text-primary
+}
+
+.side-nav li a i.material-icons{
+  padding: 18px 0px;
 }

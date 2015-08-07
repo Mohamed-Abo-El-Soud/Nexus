@@ -1,42 +1,44 @@
 <ul class="side-nav" id="mobile-demo">
   <div class="card">
     <div class="card-image">
-      <img class="" src="https://s-media-cache-ak0.pinimg.com/originals/99/a2/65/99a265b17595caaaa2c382e168a5e32b.jpg">
+      <%# <img class="" src="https://s-media-cache-ak0.pinimg.com/originals/99/a2/65/99a265b17595caaaa2c382e168a5e32b.jpg"> %>
+      <%= gravatar_for current_account, size: 600 %>
      <!-- the overlay adds a tint to the photo -->
-      <div class="overlay"></div>
-      <span class="card-title">
-        <h5 class="white-text fw300">Mohamed A.</h5>
+      <div class="overlay hide"></div>
+      <span class="card-title col s12">
+        <h5 class="section truncate white-text accent fw300"><%= current_account.first_name %></h5>
       </span>
     </div>
-    <div class="card-content hide">
-      <!-- blank for now... -->
-    </div>
-    <div class="card-action hide">
-      <a href="#">This is a link</a>
-      <a href='#'>This is a link</a>
-    </div>
   </div>
-  <li><a href="sass.html">
-    <i class="mdi-content-mail right"></i>Inbox</a>
-  </li>
-  <li><a href="components.html">
-    <i class="mdi-content-send right"></i>Sent</a>
-  </li>
-  <li><a href="javascript.html">
-    <i class="mdi-action-report-problem right"></i>Junk</a>
-  </li>
-  <li><a href="mobile.html">
-    <i class="mdi-action-delete right"></i>Trash</a>
-  </li>
+  <% button_to_hide = yield(:logo) %>
+  <% category_view = [:inbox,:sent,:spam,:trash] %>
+  <% icon_view = {inbox: "mail", sent: "send", spam: "report_problem", trash: "delete"} %>
+  <% category_view.each do |category| %>
+    <% unless button_to_hide.downcase.intern == category %>
+      <li>
+        <%= link_to method(category.to_s+"_path").call do %>
+          <i class="material-icons right"><%= icon_view[category] %></i>
+          <%= category.to_s.capitalize %>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
   <div class="divider"></div>
   <div class="section grey-text text-darken-2">
     <h5 class="fw300">Account</h5>
   </div>
+  <li class="text-primary truncate"><%= current_account.first_name %> <%= current_account.last_name %>
+  </li>
+  <li class="text-primary truncate"><%= current_account.email %>
+  </li>
+  <div class="divider"></div>
   <!-- the href attribute matches the button with the model -->
-  <li><a href="#settings" class="button-settings">
-    <i class="mdi-action-settings right"></i>Settings</a>
+  <li><a href="#settings" class="modal-trigger button-settings">
+    <i class="material-icons right">settings</i>Settings</a>
+  </li>
+  <li><%= link_to "Profile", current_account %>
   </li>
   <li>
-    <a href='#'>Signout</a>
+      <%= link_to "Log out", logout_path, method: "delete" %>
   </li>
 </ul>

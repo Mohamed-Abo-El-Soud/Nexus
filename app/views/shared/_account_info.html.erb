@@ -1,25 +1,21 @@
 <section class="card user_info">
-  <div class="col s12">
+  <div class="col0 s12">
     <div class="row card-content">
-      <h1 class="card-title text-accent">
+      <h1 class="truncate card-title0 text-accent">
         <span class="huge">
           <%= account.first_name %>
         </span>
       </h1>
-      <%= gravatar_for account, size: 200, class: "col s4" %>
-      <ul class="collection center-align ">
+      <%= gravatar_for account, size: 200, class: "col s4 m12 l4" %>
+      <ul class="collection center-align s8 m12 l8">
         <li class="collection-item"><%= account.first_name %> <%= account.last_name %></li>
         <li class="collection-item"><%= account.email %></li>
         <li class="collection-item">
-        <% if logged_in? %>
-          <% if account == current_account %>
-            <%= link_to "new message", "#new-message", class: " modal-trigger btn-flat accent col s12 row" %>
+          <% if logged_in? %>
+            <% new_or_send = account == current_account ? "new" : "send" %>
+            <%= link_to "#{new_or_send} message", "#new-message", class: "truncate modal-trigger btn-flat accent col s12 row" %>
             <%= render "messages/new_message", message: @message, account: account, reciever: nil %>
-          <% else %>
-            <%= link_to "send message", "#new-message", class: " modal-trigger btn-flat accent col s12 row" %>
-            <%= render "messages/new_message", message: @message, account: current_account, reciever: account %>
           <% end %>
-        <% end %>
         </li>
       </ul>
     </div>
