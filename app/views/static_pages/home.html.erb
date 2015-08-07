@@ -1,27 +1,29 @@
 <% provide(:title, "Home") %>
+<% provide(:logo, "Home") %>
+<% provide(:hider, "Inbox") %>
 
 <% if logged_in? %>
-  <% provide(:body, "grey lighten-2") %>
-  <div class="row">
-    <aside class="col s12 m5">
-      <br/>
-      <%= render "shared/account_info", account: current_account %>
-    </aside>
-    
-    <% if @feed_items.any? %>
-      <!-- content -->
-      <div id="content" class="col s12 m7 grey lighten-2">
-        <h3 id="messages-count" class="text-secondary">Messages (<%= @feed_items.count %>)</h3>
-        <div class="messages">
-          <%= render "shared/content", messages: @feed_items, show_sender: false %>
-          <br/>
-          <%= pagination_change @feed_items %>
+  <% if true %>
+    <% provide(:body, "grey lighten-2") %>
+    <div class="row">
+      <aside class="col s12 m5"><br/><%= render "shared/account_info", account: current_account %>
+      </aside>
+      
+      <% if @feed_items.any? %>
+          <!-- content -->
+        <div id="content" class="col s12 m7 grey lighten-2">
+          <h3 id="messages-count" class="text-secondary">Messages (<%= @feed_items.count %>)</h3>
+          <div class="messages">
+            <%= render "shared/content", messages: @feed_items, show_unread: true, show_sender: true %>
+            <br/>
+            <%= pagination_change @feed_items %>
+          </div>
         </div>
-      </div>
-      <!-- content end -->
-    <% end %>
-    
-  </div>
+        <!-- content end -->
+      <% end %>
+    </div>
+  <% end %>
+
 <% else %>
   <div id="home" class="row valign-wrapper">
   

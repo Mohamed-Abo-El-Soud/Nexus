@@ -6,7 +6,7 @@
   <% is_unread = false %>
 <% end %>
 <%# message-\<\% is_unread ? ('unread') : ('read') \%\> %>
-<div id="<%= message.id%>" class="card-wrapper">
+<div id="<%= message.id%>" class="card-wrapper<%= ' message-unread' if is_unread %>">
   <%= link_to "#show-message-#{message.id}", class: "collection-item avatar modal-trigger #{'bright' if is_unread }" do %>
     <span class="badge">
       <%= timeago message.created_at, :span, :class => "timeago" %>

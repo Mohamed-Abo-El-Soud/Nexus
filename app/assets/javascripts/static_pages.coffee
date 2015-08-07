@@ -26,7 +26,7 @@ jQuery.fn.extend
   makeUnread: ()->
     return this.each  ->
       $(this).removeClass "message-unread"
-      $(this).addClass "message-read"
+      #$(this).addClass "message-read"
       
 jQuery.fn.extend makeUnread: ->
   @each ->
