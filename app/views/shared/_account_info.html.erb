@@ -14,7 +14,7 @@
           <% if logged_in? %>
             <% new_or_send = account == current_account ? "new" : "send" %>
             <%= link_to "#{new_or_send} message", "#new-message", class: "truncate modal-trigger btn-flat accent col s12 row" %>
-            <%= render "messages/new_message", message: @message, account: account, reciever: nil %>
+            <%= render "messages/new_message", message: @message, account: account, id: "new-message", reciever: nil %>
           <% end %>
         </li>
       </ul>

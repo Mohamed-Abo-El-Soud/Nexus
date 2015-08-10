@@ -1,4 +1,5 @@
-<div id="new-message" class="modal front text-primary">
+
+<div id="<%= id %>" class="modal front text-primary">
   <%= form_for(message, url: messages_path, html: {class: "col s12", id: "new-message-form"}) do |f| %>
     <div class="modal-content">
       <h4>New message</h4>
@@ -12,10 +13,7 @@
       <div class="row">
         <div class="input-field col s12">
           <%= f.label :sender, class: "active" %>
-          <%# f.label :sender_id, class: "active" %>
-          <%# f.text_field :sender, value: account.email, disabled: true , class: "validate" %>
           <%= f.text_field :sender, value: account.email, readonly: true, class: "validate" %>
-          <%# f.text_field :sender_id, value: account.email, disabled: true , class: "validate" %>
         </div>
       </div>
       <div class="row">
@@ -24,7 +22,6 @@
           <%# f.label :reciever_id, class: "active" %>
           <%= sender ||= nil %>
           <%= f.text_field :reciever, value: (reciever ? reciever.email : nil), class: "validate" %>
-          <%# f.text_field :reciever_id, value: (reciever ? reciever.email : nil), class: "validate" %>
         </div>
       </div>
       <div class="row">

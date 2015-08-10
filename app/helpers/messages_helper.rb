@@ -99,6 +99,14 @@ module MessagesHelper
     end
     return result.join().html_safe
   end
+  
+  def generate_reply(message)
+    title = "RE: " + message.title
+    sender = Account.find(message.sender_id)
+    reciever = Account.find(message.reciever_id)
+    reciever.messages.build(title: title, reciever: sender)
+  end
+  
 =begin
 
   messages representation:
