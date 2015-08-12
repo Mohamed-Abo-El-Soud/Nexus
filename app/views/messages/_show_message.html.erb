@@ -35,18 +35,26 @@
       </div>
     </div>
     <div class="modal-footer">
-      <a href="#!" id="cancel-button" class=" modal-action modal-close waves-effect waves-green btn-flat">Back</a>
-      <% if reciever == current_account %>
-        <%= link_to "Reply", "#reply-message", id: "reply-button",
+      <a href="#!" id="cancel-button"
+         class=" modal-action modal-close waves-effect waves-green btn-flat">Back</a>
+      <% if false && reciever == current_account %>
+        <%= link_to "Reply", "#reply-message-#{ message.id }", id: "reply-button",
                            class: "modal-trigger modal-action waves-effect waves-green btn-flat" %>
-        <%= link_to "Junk", "#!", id: "junk-button",
-                           class: "text-accent modal-action waves-effect waves-yellow btn-flat" %>
-        <%= link_to "Trash", "#!", data: { confirm: "Are you sure?" }, id: "trash-button",
-                           class: "red-text modal-action waves-effect waves-red btn-flat" %>
+        <%= link_to "Spam", "#!", id: "junk-button", data: { category: "spam"},
+                           class: "text-accent modal-close modal-action send-button waves-effect waves-yellow btn-flat" %>
+        <%= link_to "Trash", "#!", id: "trash-button", data: { category: "trash"},
+                           class: "red-text modal-close modal-action send-button waves-effect waves-red btn-flat" %>
+      <% end %>
+      <% actions = generate_modal_actions(reciever, current_account, message, yield(:hider).downcase) %>
+      <%# raise unless yield(:hider).downcase  == "spam" %>
+      <% if actions.any? %>
+        <% actions.each do |link| %>
+          <%= link_to link[:body], nil, link %>
+        <% end %>
       <% end %>
     </div> 
-    <%= render "messages/new_message", message: generate_reply(message),
-                                     id: "reply-message",
-                                     account: reciever,
-                                     reciever: sender %>
 </div>
+<%= render "messages/new_message", message: generate_reply(message),
+                                 id: "reply-message-#{ message.id }",
+                                 reciever: sender %>
+  

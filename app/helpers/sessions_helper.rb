@@ -59,4 +59,9 @@ module SessionsHelper
     session[:forwarding_url] = request.url if request.get?
   end
   
+  # Stores the URL that was previously accessed.
+  def store_referrer
+    session[:forwarding_url] ||= request.referer if request.post?
+  end
+  
 end

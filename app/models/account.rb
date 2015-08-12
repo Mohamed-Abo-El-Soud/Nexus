@@ -87,7 +87,9 @@ class Account < ActiveRecord::Base
       result += or_addition + "category = '" + value + "'"
     end
     # puts args
-    Message.where(result)
+    # Message.where(result)
+    feed.where result
+    
   end
 
   private

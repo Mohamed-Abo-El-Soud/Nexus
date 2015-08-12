@@ -107,6 +107,48 @@ module MessagesHelper
     reciever.messages.build(title: title, reciever: sender)
   end
   
+  def generate_modal_actions(reciever, current_account, message, provider)
+    actions = []
+    class_base = "modal-action waves-effect btn-flat"
+    # raise unless yield(:hider).downcase  == "spam"
+    if reciever == current_account
+      actions.push({body: "Reply",
+                    href: "#reply-message-#{ message.id }",
+                    id: "reply-button",
+                    class: "modal-trigger waves-green " + class_base})
+                    
+      class_button = class_base + " modal-close send-button"
+      
+      if provider != "spam" && provider != "trash"
+        actions.push({body: "Spam",
+                      href: "#!",
+                      id: "spam-button",
+                      data: { category: "spam"},
+                      class: "text-accent waves-yellow " + class_button})
+                    
+        actions.push({body: "Trash",
+                      href: "#!",
+                      id: "trash-button",
+                      data: { category: "trash"},
+                      class: "red-text waves-red " + class_button})
+      elsif provider == "spam"
+        actions.push({body: "Not spam",
+                      href: "#!",
+                      id: "not-spam-button",
+                      data: { category: "read"},
+                      class: "text-accent waves-yellow " + class_button})
+      elsif provider == "trash"
+        actions.push({body: "Not trash",
+                      href: "#!",
+                      id: "not-trash-button",
+                      data: { category: "read"},
+                      class: "red-text waves-red " + class_button})
+      end
+      
+    end
+    actions
+  end
+  
 =begin
 
   messages representation:

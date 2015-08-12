@@ -13,14 +13,14 @@
       <div class="row">
         <div class="input-field col s12">
           <%= f.label :sender, class: "active" %>
-          <%= f.text_field :sender, value: account.email, readonly: true, class: "validate" %>
+          <% sender = Account.find message.sender_id %>
+          <%= f.text_field :sender, value: sender.email, readonly: true, class: "validate" %>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
           <%= f.label :reciever, class: "active" %>
-          <%# f.label :reciever_id, class: "active" %>
-          <%= sender ||= nil %>
+          <% reciever = message.reciever_id.nil?() ? nil : Account.find(message.reciever_id) %>
           <%= f.text_field :reciever, value: (reciever ? reciever.email : nil), class: "validate" %>
         </div>
       </div>

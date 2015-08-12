@@ -9,7 +9,7 @@
       <aside class="col s12 m5"><br/><%= render "shared/account_info", account: current_account %>
       </aside>
       
-      <% if @feed_items.any? %>
+      <% if !@feed_items.nil? && @feed_items.any? %>
           <!-- content -->
         <div id="content" class="col s12 m7 grey lighten-2">
           <h3 id="messages-count" class="text-secondary">Messages (<%= @feed_items.count %>)</h3>

@@ -19,15 +19,7 @@ window.deployToast = (type, message)->
   dismissLink = "<a class=\"btn-flat text-accent\" onClick=\"#{dismissToast}\">Dismiss</a>"
   Materialize.toast "#{textOpen}#{textClose}#{dismissLink}",50000
 
-#window.makeUnread = (item)->
-  #console.log item 
-  
-jQuery.fn.extend
-  makeUnread: ()->
-    return this.each  ->
-      $(this).removeClass "message-unread"
-      #$(this).addClass "message-read"
-      
+
 jQuery.fn.extend makeUnread: ->
   @each ->
     that = this
@@ -41,6 +33,26 @@ jQuery.fn.extend makeUnread: ->
         $(that).removeClass "message-unread"
         $(that).addClass "message-read"
         $(that).children(".collection-item.avatar.modal-trigger").removeClass "bright"
+        
+jQuery.fn.extend sendTo:(item)->
+  @each ->
+    that = this
+    parentId = $(this).parents(".modal.modal-fixed-footer").attr("id")
+    idNumber = parentId.substring parentId.length - 1
+    category = $(this).attr("data-category")
+    $.ajax
+      url: "/move_category/#{idNumber}"
+      type: "GET"
+      data:
+        id: idNumber
+        category: category
+      success: (data) ->
+        #console.log "the data has been changed?"
+        #console.log data
+        parent = $(that).parents ".card-wrapper"
+        parent.remove()
+        deployToast('success','moved to ' + category);
+        
         
 $(document).ready ()->
   
@@ -63,6 +75,18 @@ $(document).ready ()->
     $(".timeago").timeago()
     
     $(".message-unread").click ->
-      #console.log $(this)
       $(this).makeUnread()
+      
+    #$(".send-junk").click ->
+      #$(this).sendTo("Junk")
+      #
+    #$(".send-trash").click ->
+      #if confirm "Are you really sure?"
+        #$(this).sendTo("Trash")
+        
+    
+    $(".send-button").click ->
+      if confirm "Are you sure?"
+        $(this).sendTo()
+      
 

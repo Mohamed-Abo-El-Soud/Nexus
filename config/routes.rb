@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   
   get 'make_unread/:id' => "messages#make_unread"
   
+  get 'move_category/:id' => "messages#move_category"
+  
   get 'password_resets/new'
 
   get 'password_resets/edit'
