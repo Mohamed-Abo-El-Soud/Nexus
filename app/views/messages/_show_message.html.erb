@@ -37,16 +37,7 @@
     <div class="modal-footer">
       <a href="#!" id="cancel-button"
          class=" modal-action modal-close waves-effect waves-green btn-flat">Back</a>
-      <% if false && reciever == current_account %>
-        <%= link_to "Reply", "#reply-message-#{ message.id }", id: "reply-button",
-                           class: "modal-trigger modal-action waves-effect waves-green btn-flat" %>
-        <%= link_to "Spam", "#!", id: "junk-button", data: { category: "spam"},
-                           class: "text-accent modal-close modal-action send-button waves-effect waves-yellow btn-flat" %>
-        <%= link_to "Trash", "#!", id: "trash-button", data: { category: "trash"},
-                           class: "red-text modal-close modal-action send-button waves-effect waves-red btn-flat" %>
-      <% end %>
       <% actions = generate_modal_actions(reciever, current_account, message, yield(:hider).downcase) %>
-      <%# raise unless yield(:hider).downcase  == "spam" %>
       <% if actions.any? %>
         <% actions.each do |link| %>
           <%= link_to link[:body], nil, link %>

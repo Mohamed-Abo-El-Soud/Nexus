@@ -6,15 +6,9 @@
   <% is_unread = false %>
 <% end %>
 <%# message-\<\% is_unread ? ('unread') : ('read') \%\> %>
-<div id="<%= message.id%>" class="card-wrapper<%= ' message-unread' if is_unread %>">
-  <%= link_to "#show-message-#{message.id}", class: "collection-item avatar modal-trigger #{'bright' if is_unread }" do %>
-    <span class="badge">
-      <%= timeago message.created_at, :span, :class => "timeago" %>
-      <% if defined?(unread) && show_sender %>
-      <br/>
-      <span class="badge new"></span>
-      <% end %>
-    </span>
+<div id="<%= message.id%>" style="position: relative" class="hoverable card-wrapper<% ' message-unread' if is_unread %>">
+  <%= link_to "#show-message-#{message.id}",
+  class: "collection-item avatar modal-trigger #{'bright message-unread' if is_unread }" do %>
     <% sender = Account.find(message.sender_id) %>
     <%= gravatar_for sender, class: "circle responsive-img" %>
     <!--email content-->
@@ -25,6 +19,14 @@
     <p class="grey-text text-darken-3 truncate"><%= message.content %> </p>
     <!--end email content-->
   <% end %>
+  <span class="badge secondary-content">
+    <%= timeago message.created_at, :span, :class => "timeago" %>
+    <% if false && is_unread && show_sender %>
+      <br/>
+      <span class="badge accent text-primary-light">new</span>
+    <% end %>
+    <%= generate_badge_actions(is_unread, show_sender) %>
+  </span>
   <%= render "messages/show_message", message: message%>
 </div>
 

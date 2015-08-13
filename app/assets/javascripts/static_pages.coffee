@@ -23,7 +23,8 @@ window.deployToast = (type, message)->
 jQuery.fn.extend makeUnread: ->
   @each ->
     that = this
-    id = $(this).attr "id"
+    #id = $(this).attr "id"
+    id = $(this).parents(".card-wrapper").attr "id"
     $.ajax
       url: "/make_unread/#{id}"
       type: "GET"
@@ -32,14 +33,23 @@ jQuery.fn.extend makeUnread: ->
       success: (data) ->
         $(that).removeClass "message-unread"
         $(that).addClass "message-read"
-        $(that).children(".collection-item.avatar.modal-trigger").removeClass "bright"
+        #$(that).children(".collection-item.avatar.modal-trigger").removeClass "bright"
+        $(that).removeClass "bright"
+        #$(that).find(".badge-new").remove()
+        $(that).siblings(".badge.secondary-content").find(".badge-new").remove()
         
 jQuery.fn.extend sendTo:(item)->
   @each ->
     that = this
-    parentId = $(this).parents(".modal.modal-fixed-footer").attr("id")
-    idNumber = parentId.substring parentId.length - 1
+    parent = $(this).parents ".card-wrapper" #.parents(".modal.modal-fixed-footer")
+    idNumber = parent.attr("id")
+    #parentId = idNumber = null
+    #if (parent.length)
+      #idNumber = parent.attr("id")
+      #parentId = parent.attr("id")
+      #idNumber = parentId.substring parentId.length - 1
     category = $(this).attr("data-category")
+    message = $(this).attr("data-message")
     $.ajax
       url: "/move_category/#{idNumber}"
       type: "GET"
@@ -51,7 +61,8 @@ jQuery.fn.extend sendTo:(item)->
         #console.log data
         parent = $(that).parents ".card-wrapper"
         parent.remove()
-        deployToast('success','moved to ' + category);
+        toastMessage = if message? then message else ('moved to ' + category)
+        deployToast('success',toastMessage);
         
         
 $(document).ready ()->

@@ -135,18 +135,44 @@ module MessagesHelper
         actions.push({body: "Not spam",
                       href: "#!",
                       id: "not-spam-button",
-                      data: { category: "read"},
+                      data: { category: "read", message: "moved back into your inbox"},
                       class: "text-accent waves-yellow " + class_button})
       elsif provider == "trash"
         actions.push({body: "Not trash",
                       href: "#!",
                       id: "not-trash-button",
-                      data: { category: "read"},
+                      data: { category: "read", message: "moved back into your inbox"},
                       class: "red-text waves-red " + class_button})
       end
       
     end
     actions
+  end
+  
+  def generate_badge_actions(is_unread, show_sender) #, reciever, current_account, message, )
+    provider = content_for(:hider).downcase
+    result = []
+    message = ""
+    if provider == "spam" || provider == "trash"
+      # more blah
+      message = "retrieve"
+      result.push content_tag(:span,
+                              # message,
+                              :class => "hoverable badge green badge-new") {
+        concat content_tag(:a,
+                           message,
+                           :href => "#!",
+                           :data => { category: "read", message: "moved back into your inbox"},
+                           :class => "text-primary-light send-button")
+      }
+    elsif is_unread && show_sender
+      # blah
+      message = "new"
+      result.push content_tag(:span,
+                              message,
+                              :class => "hoverable badge accent text-primary-light badge-new")
+    end
+    return result[0]
   end
   
 =begin

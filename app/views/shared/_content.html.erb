@@ -3,6 +3,6 @@
   
   <% roster = initialize_time_sort messages%>
 
-  <%= display_time_sort roster, show_unread: show_unread, show_sender: show_sender %>
+  <%= display_time_sort(roster, {show_unread: show_unread, show_sender: show_sender}) %>
 
 <!--messages end-->
