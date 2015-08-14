@@ -1,6 +1,6 @@
 <% provide(:title, @account.first_name) %>
 <% provide(:logo, @account.first_name) %>
-<% provide(:hider, "sent") %>
+<%# provide(:hider, "sent") %>
 
 <% provide(:body, "grey lighten-2") %>
 <div class="row">
@@ -13,7 +13,7 @@
     <div id="content" class="col s12 m7 grey lighten-2">
       <h3 id="messages-count" class="text-secondary">Messages (<%= @account.messages.count %>)</h3>
       <div class="messages">
-        <%= render "shared/content", messages: @messages, show_unread: false, show_sender: false %>
+        <%= render "shared/content", messages: @messages, show_unread: true, show_sender: false %>
         <br/>
         <%= pagination_change @messages %>
       </div>

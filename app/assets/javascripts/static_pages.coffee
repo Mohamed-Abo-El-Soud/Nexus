@@ -3,8 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 # general function to deploy a tooltip
-
-#console.log "static_pages"
 window.deployToast = (type, message)->
   typeClass = switch type
     when "success"
@@ -23,7 +21,6 @@ window.deployToast = (type, message)->
 jQuery.fn.extend makeUnread: ->
   @each ->
     that = this
-    #id = $(this).attr "id"
     id = $(this).parents(".card-wrapper").attr "id"
     $.ajax
       url: "/make_unread/#{id}"
@@ -33,21 +30,14 @@ jQuery.fn.extend makeUnread: ->
       success: (data) ->
         $(that).removeClass "message-unread"
         $(that).addClass "message-read"
-        #$(that).children(".collection-item.avatar.modal-trigger").removeClass "bright"
         $(that).removeClass "bright"
-        #$(that).find(".badge-new").remove()
         $(that).siblings(".badge.secondary-content").find(".badge-new").remove()
         
 jQuery.fn.extend sendTo:(item)->
   @each ->
     that = this
-    parent = $(this).parents ".card-wrapper" #.parents(".modal.modal-fixed-footer")
+    parent = $(this).parents ".card-wrapper" 
     idNumber = parent.attr("id")
-    #parentId = idNumber = null
-    #if (parent.length)
-      #idNumber = parent.attr("id")
-      #parentId = parent.attr("id")
-      #idNumber = parentId.substring parentId.length - 1
     category = $(this).attr("data-category")
     message = $(this).attr("data-message")
     $.ajax
@@ -57,12 +47,25 @@ jQuery.fn.extend sendTo:(item)->
         id: idNumber
         category: category
       success: (data) ->
-        #console.log "the data has been changed?"
-        #console.log data
         parent = $(that).parents ".card-wrapper"
         parent.remove()
         toastMessage = if message? then message else ('moved to ' + category)
         deployToast('success',toastMessage);
+        
+#jQuery.fn.extend searchBar: ->
+  #@each ->
+    #that = this
+    #id = $(this).parents(".card-wrapper").attr "id"
+    #$.ajax
+      #url: "/make_unread/#{id}"
+      #type: "GET"
+      #data:
+        #id: id
+      #success: (data) ->
+        #$(that).removeClass "message-unread"
+        #$(that).addClass "message-read"
+        #$(that).removeClass "bright"
+        #$(that).siblings(".badge.secondary-content").find(".badge-new").remove()
         
         
 $(document).ready ()->
@@ -87,17 +90,9 @@ $(document).ready ()->
     
     $(".message-unread").click ->
       $(this).makeUnread()
-      
-    #$(".send-junk").click ->
-      #$(this).sendTo("Junk")
-      #
-    #$(".send-trash").click ->
-      #if confirm "Are you really sure?"
-        #$(this).sendTo("Trash")
-        
     
     $(".send-button").click ->
       if confirm "Are you sure?"
         $(this).sendTo()
-      
-
+    
+    
