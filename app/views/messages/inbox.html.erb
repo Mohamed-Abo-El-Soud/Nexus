@@ -14,7 +14,7 @@
       <div id="content" class="col s12 m7 grey lighten-2">
         <h3 id="messages-count" class="text-secondary">Messages (<%= @feed_items.count %>)</h3>
         <div class="messages">
-          <%= render "shared/content", messages: @feed_items, show_unread: true, show_sender: true %>
+          <%= render "shared/content", messages: @feed_items, show_sender: true %>
           <br/>
           <%= pagination_change @feed_items %>
         </div>

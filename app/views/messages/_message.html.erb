@@ -1,10 +1,6 @@
 
 <!-- the valign-wrapper works similar to the row class in this case -->
-<% if defined?(show_unread) && show_unread %>
-  <% is_unread = message.category == "unread" %>
-<% else %>
-  <% is_unread = false %>
-<% end %>
+<% is_unread = get_is_unread message %>
 <div id="<%= message.id%>" style="position: relative" class="hoverable card-wrapper<% ' message-unread' if is_unread %>">
   <%= link_to "#show-message-#{message.id}",
   class: "collection-item avatar modal-trigger #{'bright message-unread' if is_unread }" do %>

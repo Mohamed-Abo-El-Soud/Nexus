@@ -91,6 +91,15 @@ class Account < ActiveRecord::Base
     feed.where result
     
   end
+  
+  # defined all messages where the account is involved
+  def involved(other_account = self)
+    if other_account == self
+      return messages
+    end
+    Message.where("(reciever_id = ? AND sender_id = ?) OR (reciever_id = ? AND sender_id = ?)",
+                  id,other_account.id,other_account.id,id)
+  end
 
   private
     

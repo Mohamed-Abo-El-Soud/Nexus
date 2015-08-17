@@ -2,7 +2,6 @@ class MessagesController < ApplicationController
   before_action :logged_in_account
   
   def inbox
-    # @feed_items = current_account.category("read","unread").where("reciever_id = ?", current_account.id).paginate(page: params[:page])
     @feed_items = current_account.category("read","unread").paginate(page: params[:page])
   end
 
@@ -11,12 +10,10 @@ class MessagesController < ApplicationController
   end
 
   def spam
-    # @feed_items = current_account.category("spam").where("reciever_id = ?", current_account.id).paginate(page: params[:page])
     @feed_items = current_account.category("spam").paginate(page: params[:page])
   end
 
   def trash
-    # @feed_items = current_account.category("trash").where("reciever_id = ?", current_account.id).paginate(page: params[:page])
     @feed_items = current_account.category("trash").paginate(page: params[:page])
   end
   
@@ -49,13 +46,6 @@ class MessagesController < ApplicationController
     end
   end
   
-  def make_unread
-    message = Message.find(params[:id])
-    message.category = "read"
-    if message.save
-      render text: "OK"
-    end
-  end
   
   def move_category
     message = Message.find(params[:id])

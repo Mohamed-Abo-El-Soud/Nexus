@@ -167,9 +167,13 @@ module MessagesHelper
     return result[0]
   end
   
-  def is_unread(message)
-    # sdjifo
-    
+  def get_is_unread(message)
+    if message.category == "unread"
+      if message.reciever == current_account
+        return true
+      end
+    end
+    return false
   end
   
 =begin

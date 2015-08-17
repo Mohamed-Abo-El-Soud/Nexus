@@ -11,16 +11,27 @@ class Message < ActiveRecord::Base
   
   before_create :make_unread
   
+  # # Converts messages to unread
+  # def make_unread
+  #   self.category = "unread"
+  # end
+    
+  # # Converts messages to unread
+  # def change_to_unread
+  #   self.category = "unread"
+  #   save
+  # end
+  
+  # def self.search(search)
+  #   where("name LIKE ?", "%#{search}%") 
+  #   where("content LIKE ?", "%#{search}%")
+  # end
+    
+  private
+    
     # Converts messages to unread
     def make_unread
       self.category = "unread"
     end
-    
-  # private
-    
-  #   # Converts messages to unread
-  #   def make_unread
-  #     self.category = "unread"
-  #   end
     
 end

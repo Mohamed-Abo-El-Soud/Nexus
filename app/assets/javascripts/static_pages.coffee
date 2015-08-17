@@ -18,20 +18,15 @@ window.deployToast = (type, message)->
   Materialize.toast "#{textOpen}#{textClose}#{dismissLink}",50000
 
 
-jQuery.fn.extend makeUnread: ->
+jQuery.fn.extend makeRead: ->
   @each ->
     that = this
     id = $(this).parents(".card-wrapper").attr "id"
-    $.ajax
-      url: "/make_unread/#{id}"
-      type: "GET"
-      data:
-        id: id
-      success: (data) ->
-        $(that).removeClass "message-unread"
-        $(that).addClass "message-read"
-        $(that).removeClass "bright"
-        $(that).siblings(".badge.secondary-content").find(".badge-new").remove()
+    move_category id, "read", ->
+      $(that).removeClass "message-unread"
+      $(that).addClass "message-read"
+      $(that).removeClass "bright"
+      $(that).siblings(".badge.secondary-content").find(".badge-new").remove()
         
 jQuery.fn.extend sendTo:(item)->
   @each ->
@@ -40,32 +35,46 @@ jQuery.fn.extend sendTo:(item)->
     idNumber = parent.attr("id")
     category = $(this).attr("data-category")
     message = $(this).attr("data-message")
-    $.ajax
-      url: "/move_category/#{idNumber}"
-      type: "GET"
-      data:
-        id: idNumber
-        category: category
-      success: (data) ->
-        parent = $(that).parents ".card-wrapper"
-        parent.remove()
-        toastMessage = if message? then message else ('moved to ' + category)
-        deployToast('success',toastMessage);
+    $(that).parents(".modal").closeModal()
+    move_category idNumber, category, ->
+      parent = $(that).parents ".card-wrapper"
+      parent.remove()
+      toastMessage = if message? then message else ('moved to ' + category)
+      deployToast('success',toastMessage);
         
-#jQuery.fn.extend searchBar: ->
-  #@each ->
-    #that = this
-    #id = $(this).parents(".card-wrapper").attr "id"
-    #$.ajax
-      #url: "/make_unread/#{id}"
-      #type: "GET"
-      #data:
-        #id: id
-      #success: (data) ->
-        #$(that).removeClass "message-unread"
-        #$(that).addClass "message-read"
-        #$(that).removeClass "bright"
-        #$(that).siblings(".badge.secondary-content").find(".badge-new").remove()
+        
+move_category = (id, category, callback)->
+  $.ajax
+    url: "/move_category/#{id}"
+    type: "GET"
+    data:
+      id: id
+      category: category
+      success: (data) ->
+        callback(data) if callback?
+        
+jQuery.fn.extend activation: ->
+  @each ->
+    origin = $(this)
+    activates = $("#" + origin.attr("data-activates"))
+    #origin.off('click.' + origin.attr('id'))
+    origin.on ("click." + origin.attr('id')), (e)->
+      activates.addClass("active")
+      #if activates.hasClass('active')
+      $(document).on 'click.' + activates.attr('id'), (e) ->
+        # if target isn't the activates
+        if !activates.is(e.target) and
+        # or the origin
+        !origin.is(e.target) and
+        # or the child of the activates
+        !activates.find(e.target).length > 0 and
+        # or the child of the origin
+        !origin.find(e.target).length > 0 or
+        # or if the target is the reset button or a child of the reset button
+        activates.find("button[type='reset'], button[type='reset'] *").is(e.target)
+          activates.removeClass("active")
+          $(document).off 'click.' + activates.attr('id')
+        return
         
         
 $(document).ready ()->
@@ -89,10 +98,19 @@ $(document).ready ()->
     $(".timeago").timeago()
     
     $(".message-unread").click ->
-      $(this).makeUnread()
+      $(this).makeRead()
     
     $(".send-button").click ->
       if confirm "Are you sure?"
         $(this).sendTo()
     
+    $(".button-activation").activation()
     
+# TODO - What's left to be done in this current project:
+# 1. (DONE) Rethink the read / unread system in the messsages
+# 2. (DONE) Viewing the profile of other accounts, should not show ALL
+# of their sent messages, but only the ones which involve you (the current user)
+# 3. (DONE) Rework the make_unread and the move_category in the front and back-end
+# 4. (DONE) Implement the front-end of the search-bar using existing code and JQuery or AngularJS
+# 5. Implement the back-end of the search bar either using the rails framework and AJAX
+# requests or through AngularJS

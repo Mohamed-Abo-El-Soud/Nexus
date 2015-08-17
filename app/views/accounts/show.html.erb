@@ -8,12 +8,12 @@
   <aside class="col s12 m5">
     <%= render "shared/account_info", account: @account %>
   </aside>
-  <% if @account.messages.any? %>
+  <% if @messages.any? %>
     <!-- content -->
     <div id="content" class="col s12 m7 grey lighten-2">
-      <h3 id="messages-count" class="text-secondary">Messages (<%= @account.messages.count %>)</h3>
+      <h3 id="messages-count" class="text-secondary">Messages (<%= @messages.count %>)</h3>
       <div class="messages">
-        <%= render "shared/content", messages: @messages, show_unread: true, show_sender: false %>
+        <%= render "shared/content", messages: @messages, show_sender: false %>
         <br/>
         <%= pagination_change @messages %>
       </div>

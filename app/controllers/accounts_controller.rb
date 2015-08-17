@@ -7,9 +7,8 @@ class AccountsController < ApplicationController
   include MessagesHelper
   
   def show
-    # debugger
     @account = Account.find(params[:id])
-    @messages = @account.messages.paginate(page: params[:page])
+    @messages = @account.involved(current_account).paginate(page: params[:page])
   end
   
   def index
