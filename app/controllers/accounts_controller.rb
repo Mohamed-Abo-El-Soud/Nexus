@@ -8,7 +8,7 @@ class AccountsController < ApplicationController
   
   def show
     @account = Account.find(params[:id])
-    @messages = @account.involved(current_account).paginate(page: params[:page])
+    @messages = feed_chooser "other", @account
   end
   
   def index

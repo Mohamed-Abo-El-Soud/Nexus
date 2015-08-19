@@ -2,19 +2,29 @@ class MessagesController < ApplicationController
   before_action :logged_in_account
   
   def inbox
-    @feed_items = current_account.category("read","unread").paginate(page: params[:page])
+    @feed_items = feed_chooser "inbox"
   end
 
   def sent
-    @feed_items = current_account.messages.paginate(page: params[:page])
+    @feed_items = feed_chooser "sent"
   end
 
   def spam
-    @feed_items = current_account.category("spam").paginate(page: params[:page])
+    @feed_items = feed_chooser "spam"
   end
 
   def trash
-    @feed_items = current_account.category("trash").paginate(page: params[:page])
+    @feed_items = feed_chooser "trash"
+  end
+  
+  def search
+    # stuff...
+    type = params[:type]
+    other_account = params[:other_account]
+    key_terms = params[:key_terms]
+    query = feed_chooser type
+    feed_items = search_for key_terms, query
+    render feed_items
   end
   
   def create
@@ -89,4 +99,22 @@ class MessagesController < ApplicationController
     end
     
     
+    def search_for(search,query)
+      # preparation_query = "SELECT Accounts.first_name, Accounts.last_name, Messages.title, Messages.content 
+      #                       FROM Messages JOIN Accounts ON Messages.sender_id = Accounts.id"
+      
+      query ||= Message.joins("JOIN Accounts ON Messages.sender_id = Accounts.id")
+      query.where("Messages.title LIKE ? or
+                  Messages.content LIKE ? or
+                  Accounts.first_name LIKE ? or
+                  Accounts.last_name LIKE ?",
+                  "%#{search}%",
+                  "%#{search}%",
+                  "%#{search}%",
+                  "%#{search}%")
+      
+      # this is how a merge is done
+      # name_relation = first_name_relation.merge(last_name_relation)
+      
+    end
 end

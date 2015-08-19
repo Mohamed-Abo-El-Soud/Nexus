@@ -29,9 +29,25 @@ class ApplicationController < ActionController::Base
   
     def build_message
       if logged_in?
-        @feed_items = current_account.category("read","unread").paginate(page: params[:page])
-        # @feed_items = current_account.feed.paginate(page: params[:page])
+        # @feed_items = current_account.category("read","unread").paginate(page: params[:page])
+        @feed_items = feed_chooser "inbox"
         @message = current_account.messages.build
+      end
+    end
+    
+    def feed_chooser(type, other_account = nil)
+      case type
+        when "inbox"
+          current_account.category("read","unread").paginate(page: params[:page])
+        when "sent"
+          current_account.messages.paginate(page: params[:page])
+        when "spam"
+          current_account.category("spam").paginate(page: params[:page])
+        when "trash"
+          current_account.category("trash").paginate(page: params[:page])
+        when "other"
+          other_account.involved(current_account).paginate(page: params[:page])
+        else raise
       end
     end
 end

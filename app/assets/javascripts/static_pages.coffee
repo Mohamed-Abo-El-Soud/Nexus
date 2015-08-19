@@ -106,6 +106,8 @@ $(document).ready ()->
     
     $(".button-activation").activation()
     
+    #$(".search-field").
+    
 # TODO - What's left to be done in this current project:
 # 1. (DONE) Rethink the read / unread system in the messsages
 # 2. (DONE) Viewing the profile of other accounts, should not show ALL
