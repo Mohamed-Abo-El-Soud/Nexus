@@ -2,6 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+window.Rails = {application: "Nexus"}
+
 # general function to deploy a tooltip
 window.deployToast = (type, message)->
   typeClass = switch type
@@ -53,14 +55,15 @@ move_category = (id, category, callback)->
       success: (data) ->
         callback(data) if callback?
         
-jQuery.fn.extend activation: ->
+jQuery.fn.extend activation:(callback)->
   @each ->
     origin = $(this)
     activates = $("#" + origin.attr("data-activates"))
     #origin.off('click.' + origin.attr('id'))
     origin.on ("click." + origin.attr('id')), (e)->
       activates.addClass("active")
-      #if activates.hasClass('active')
+      # trigger callback on activation
+      callback() if callback?
       $(document).on 'click.' + activates.attr('id'), (e) ->
         # if target isn't the activates
         if !activates.is(e.target) and
@@ -76,7 +79,44 @@ jQuery.fn.extend activation: ->
           $(document).off 'click.' + activates.attr('id')
         return
         
+jQuery.fn.extend searchBar:(callback)->
+  @each ->
+    # TODO:
+    # 1. trigger event when the user starts typing
+    $(this).keyup ()->
+      $(this).doSearch(callback)
+      
+
+jQuery.fn.extend doSearch:(callback)->
+  @each ->
+    # TODO:
+    # 1. get the key-terms from the search bar
+    # 2. send ajax request to get search results
+    # 3. format the search results
+    val = $(this).val()
+    #if val && val != window.$PreviousValue
+      #console.log val
+    window.$PreviousValue = val
+    #console.log Rails.page
+    #console.log Rails.otherAccount
+    $.ajax
+    # TODO:
+    # 1. (partially done) get the key terms
+    # 2. (partially done) get the current page category
+    # 3. (partially done) if the page category is an account's profile, get the account's id
+    # 4. get search results (excecute callback maybe?)
+      url: "/search"
+      type: "GET"
+      data:
+        type: "other"#"sent"
+        other_account: 3
+        key_terms: "facilis"
+      success: (data) ->
+        #console.log $(data)
+        window.cow = data
+        callback(data) if callback?
         
+
 $(document).ready ()->
   
     $('.modal-trigger').leanModal()
@@ -104,9 +144,11 @@ $(document).ready ()->
       if confirm "Are you sure?"
         $(this).sendTo()
     
-    $(".button-activation").activation()
+    $(".button-activation").activation( ()->
+      $(".search-field").doSearch()
+      )
     
-    #$(".search-field").
+    $(".search-field").searchBar()
     
 # TODO - What's left to be done in this current project:
 # 1. (DONE) Rethink the read / unread system in the messsages

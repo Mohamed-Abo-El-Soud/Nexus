@@ -3,7 +3,10 @@
 <% provide(:hider, "Inbox") %>
 
 <% if logged_in? %>
-  <% if true %>
+    <script>
+      Rails.page = "inbox";
+    </script>
+
     <% provide(:body, "grey lighten-2") %>
     <div class="row">
       <aside class="col s12 m5"><br/><%= render "shared/account_info", account: current_account %>
@@ -22,7 +25,6 @@
         <!-- content end -->
       <% end %>
     </div>
-  <% end %>
 
 <% else %>
   <div id="home" class="row valign-wrapper">

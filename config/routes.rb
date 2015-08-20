@@ -10,9 +10,9 @@ Rails.application.routes.draw do
 
   get '/trash' => 'messages#trash'
   
-  get 'make_unread/:id' => "messages#make_unread"
-  
   get 'move_category/:id' => "messages#move_category"
+  
+  get 'search' => "messages#search"
   
   get 'password_resets/new'
 

@@ -18,13 +18,18 @@ class MessagesController < ApplicationController
   end
   
   def search
-    # stuff...
     type = params[:type]
     other_account = params[:other_account]
+    other_account = Account.find(other_account) if other_account
     key_terms = params[:key_terms]
-    query = feed_chooser type
+    query = feed_chooser type, other_account
     feed_items = search_for key_terms, query
-    render feed_items
+    # render json: feed_items
+    # render "shared/content", messages: feed_items.paginate(page: params[:page]), show_sender: false
+    @messages = feed_items.paginate(page: params[:page])
+    render partial: "shared/content",
+           locals: {messages: feed_items.paginate(page: params[:page]), show_sender: false}
+    
   end
   
   def create
@@ -99,11 +104,12 @@ class MessagesController < ApplicationController
     end
     
     
-    def search_for(search,query)
+    def search_for(search, query)
       # preparation_query = "SELECT Accounts.first_name, Accounts.last_name, Messages.title, Messages.content 
       #                       FROM Messages JOIN Accounts ON Messages.sender_id = Accounts.id"
       
-      query ||= Message.joins("JOIN Accounts ON Messages.sender_id = Accounts.id")
+      # query ||= Message.joins("JOIN Accounts ON Messages.sender_id = Accounts.id")
+      query = query.joins("JOIN Accounts ON Messages.sender_id = Accounts.id")
       query.where("Messages.title LIKE ? or
                   Messages.content LIKE ? or
                   Accounts.first_name LIKE ? or

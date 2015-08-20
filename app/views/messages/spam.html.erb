@@ -1,7 +1,10 @@
 <% provide(:title, "Spam") %>
 <% provide(:logo, "Spam") %>
 <% provide(:hider, "Spam") %>
-<%# content_for(:hider, "Spam") %>
+
+<script>
+  Rails.page = "spam";
+</script>
 
   <% provide(:body, "grey lighten-2") %>
   <div class="row">

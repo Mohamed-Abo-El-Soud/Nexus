@@ -2,6 +2,11 @@
 <% provide(:logo, @account.first_name) %>
 <%# provide(:hider, "sent") %>
 
+<%= javascript_tag do %>
+  Rails.page = "other";
+  Rails.otherAccount = <%= raw @account.id.to_json %>;
+<% end %>
+
 <% provide(:body, "grey lighten-2") %>
 <div class="row">
   <br/>
