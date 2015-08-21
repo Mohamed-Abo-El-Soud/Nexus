@@ -24,11 +24,8 @@ class MessagesController < ApplicationController
     key_terms = params[:key_terms]
     query = feed_chooser type, other_account
     feed_items = search_for key_terms, query
-    # render json: feed_items
-    # render "shared/content", messages: feed_items.paginate(page: params[:page]), show_sender: false
-    @messages = feed_items.paginate(page: params[:page])
     render partial: "shared/content",
-           locals: {messages: feed_items.paginate(page: params[:page]), show_sender: false}
+           locals: {messages: feed_items, show_sender: type=="inbox"}
     
   end
   

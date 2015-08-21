@@ -55,7 +55,7 @@ move_category = (id, category, callback)->
       success: (data) ->
         callback(data) if callback?
         
-jQuery.fn.extend activation:(callback)->
+jQuery.fn.extend activation:(callbackObject)->
   @each ->
     origin = $(this)
     activates = $("#" + origin.attr("data-activates"))
@@ -63,7 +63,7 @@ jQuery.fn.extend activation:(callback)->
     origin.on ("click." + origin.attr('id')), (e)->
       activates.addClass("active")
       # trigger callback on activation
-      callback() if callback?
+      callbackObject.onActivate() if callbackObject?
       $(document).on 'click.' + activates.attr('id'), (e) ->
         # if target isn't the activates
         if !activates.is(e.target) and
@@ -75,6 +75,7 @@ jQuery.fn.extend activation:(callback)->
         !origin.find(e.target).length > 0 or
         # or if the target is the reset button or a child of the reset button
         activates.find("button[type='reset'], button[type='reset'] *").is(e.target)
+          callbackObject.onDeactivate() if callbackObject?
           activates.removeClass("active")
           $(document).off 'click.' + activates.attr('id')
         return
@@ -85,37 +86,56 @@ jQuery.fn.extend searchBar:(callback)->
     # 1. trigger event when the user starts typing
     $(this).keyup ()->
       $(this).doSearch(callback)
+    $(this).siblings("button[type='reset']").click ()->
+      callback.onBlank() if callback?
       
 
-jQuery.fn.extend doSearch:(callback)->
+jQuery.fn.extend doSearch:(callbackObject)->
   @each ->
     # TODO:
     # 1. get the key-terms from the search bar
     # 2. send ajax request to get search results
     # 3. format the search results
     val = $(this).val()
-    #if val && val != window.$PreviousValue
-      #console.log val
-    window.$PreviousValue = val
-    #console.log Rails.page
-    #console.log Rails.otherAccount
-    $.ajax
-    # TODO:
-    # 1. (partially done) get the key terms
-    # 2. (partially done) get the current page category
-    # 3. (partially done) if the page category is an account's profile, get the account's id
-    # 4. get search results (excecute callback maybe?)
-      url: "/search"
-      type: "GET"
-      data:
-        type: "other"#"sent"
-        other_account: 3
-        key_terms: "facilis"
-      success: (data) ->
-        #console.log $(data)
-        window.cow = data
-        callback(data) if callback?
+    if val
+      if val != window.$PreviousValue
+        window.$PreviousValue = val
+        $.ajax
+          # TODO:
+          # 1. (done) get the key terms
+          # 2. (done) get the current page category
+          # 3. (done) if the page category is an account's profile, get the account's id
+          # 4. (done) get search results (excecute callback maybe?)
+          url: "/search"
+          type: "GET"
+          data:
+            type: Rails.page
+            other_account: Rails.otherAccount
+            key_terms: val
+          success: (data) ->
+            callbackObject.onSearchResult(data) if callbackObject?
+    else
+      window.$PreviousValue = null
+      callbackObject.onBlank() if callbackObject?
         
+window.staticContent = null
+window.staticCount = null 
+replaceWithSearchResults = (data)->
+  window.staticContent ||= $("#content .messages").html()
+  window.staticCount ||= $("#messages-count").html()
+  $("#content .messages").modifyHTML data
+  $("#messages-count").html "Search results (" + $("info.search-count.hide").html() + ")"
+  
+revertToStaticContent = ()->
+  throw("ERROR: no static content!") if window.staticContent is null
+  $("#content .messages").modifyHTML window.staticContent
+  $("#messages-count").html window.staticCount
+  
+jQuery.fn.extend modifyHTML:(data)->
+  @each ->
+    $(this).html(data)
+    $('.modal-trigger').leanModal()
+    $(".timeago").timeago()
 
 $(document).ready ()->
   
@@ -144,11 +164,12 @@ $(document).ready ()->
       if confirm "Are you sure?"
         $(this).sendTo()
     
-    $(".button-activation").activation( ()->
-      $(".search-field").doSearch()
-      )
+    $(".button-activation").activation()
     
-    $(".search-field").searchBar()
+    $(".search-field").searchBar(
+      onSearchResult: replaceWithSearchResults
+      onBlank: revertToStaticContent
+    )
     
 # TODO - What's left to be done in this current project:
 # 1. (DONE) Rethink the read / unread system in the messsages
